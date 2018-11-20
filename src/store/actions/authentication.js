@@ -38,7 +38,7 @@ export const checkForExpiredToken = () => {
 export const login = (userData, history) => {
   return dispatch => {
     axios
-      .post("http://127.0.0.1:8000/login/", userData)
+      .post("http://127.0.0.1:8000/api/login/", userData)
       .then(res => res.data)
       .then(user => {
         const decodedUser = jwt_decode(user.token);
@@ -47,7 +47,7 @@ export const login = (userData, history) => {
         history.push("/");
       })
       .catch(err => {
-        dispatch(setErrors(err.response.data));
+        dispatch(setErrors(err));
       });
   };
 };
@@ -55,7 +55,7 @@ export const login = (userData, history) => {
 export const signup = (userData, history) => {
   return dispatch => {
     axios
-      .post("http://coffee.q8fawazo.me/api/register/", userData)
+      .post("http://127.0.0.1:8000/api/register/", userData)
       .then(() =>
         dispatch(
           login(
@@ -65,7 +65,7 @@ export const signup = (userData, history) => {
         )
       )
       .then(() => history.push("/"))
-      .catch(error => console.log(error.response.data));
+      .catch(error => console.log(error));
   };
 };
 

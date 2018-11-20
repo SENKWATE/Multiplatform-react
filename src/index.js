@@ -5,6 +5,9 @@ import { Provider } from "react-redux";
 import registerServiceWorker from "./serviceWorker";
 import { checkForExpiredToken } from "./store/actions/authentication";
 
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 // Components
 import App from "./App";
 

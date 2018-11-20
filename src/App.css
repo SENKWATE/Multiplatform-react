@@ -1,40 +1,42 @@
-.App {
+.title {
+  font-family: "Spicy Rice", cursive;
+  color: #50fdfd;
+
+  /* text-shadow: 3px 2px black; */
+  font-size: 100px;
+  animation: bobble 2s infinite;
+}
+
+.backHello {
+  background: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BhBjRHe1Mj9qufshq/videoblocks-video-4k-animation-shinny-blue-stars-slowly-movement-in-black-galaxy-space-background-at-night_rlkmgjykg_thumbnail-full01.png")
+    no-repeat center center fixed;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.description {
+  font-family: "Ranga", cursive;
+  font-family: "Acme", sans-serif;
+  font-size: 50px;
+  color: #61e9e9;
+  text-shadow: 3px 2px #016064;
+}
+
+.channel {
+  font-family: "Acme", sans-serif;
+  font-family: "Ranga", cursive;
+  font-family: "Lobster", cursive;
+  font-size: 60px;
   text-align: center;
+  color: #61e9e9;
+  text-shadow: 3px 2px #016064;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-////////////////////////////////////////
 
 .footer {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
 @keyframes bobble {
   0% {
     transform: translate3d(50px, 40px, 0px);
