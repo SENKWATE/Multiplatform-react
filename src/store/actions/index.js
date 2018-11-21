@@ -5,3 +5,5 @@ export {
   checkForExpiredToken,
   setErrors
 } from "./authentication";
+
+export { setErrors } from "./errors";

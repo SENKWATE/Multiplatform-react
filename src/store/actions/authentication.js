@@ -2,6 +2,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 import * as actionTypes from "./actionTypes";
+import { setErrors } from "./errors";
 
 const setAuthToken = token => {
   if (token) {
@@ -73,11 +74,6 @@ export const logout = () => {
   setAuthToken();
   return setCurrentUser();
 };
-
-export const setErrors = errors => ({
-  type: actionTypes.SET_ERRORS,
-  payload: errors
-});
 
 const setCurrentUser = user => ({
   type: actionTypes.SET_CURRENT_USER,

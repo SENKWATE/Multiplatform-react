@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actionCreators from "../store/actions/authentication";
+import * as actionErrors from "../store/actions/errors";
 
 class RegistationForm extends Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class RegistationForm extends Component {
     const errors = this.props.errors;
 
     if (this.props.user) {
-      this.props.history.push("/");
+      return <Redirect to="/" />;
     }
     return (
       <div className="card col-6 mx-auto p-0 mt-5">
@@ -150,7 +151,7 @@ const mapDispatchToProps = dispatch => {
     login: (userData, history) =>
       dispatch(actionCreators.login(userData, history)),
 
-    resetForm: () => dispatch(actionCreators.setErrors({}))
+    resetForm: () => dispatch(actionErrors.setErrors({}))
   };
 };
 

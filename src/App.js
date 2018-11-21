@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import RegistrationForm from "./components/RegistrationForm";
 import Welcome from "./components/Welcome";
 import NavBar from "./components/Navigation/NavBar";
-import LoginForm from "./components/LoginForm";
 
 import { Provider } from "react-redux";
 import store from "./store";

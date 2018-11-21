@@ -11,10 +11,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         user: action.payload
       };
-    case actionTypes.SET_ERRORS:
-      return {
-        ...action.payload
-      };
     default:
       return state;
   }
