@@ -7,7 +7,7 @@ import { checkForExpiredToken } from "./store/actions/authentication";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import "bootstrap/dist/js/bootstrap.min.js";
 // Components
 import App from "./App";
 

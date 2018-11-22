@@ -7,3 +7,5 @@ export {
 } from "./authentication";
 
 export { setErrors } from "./errors";
+
+export { fetchItems } from "./category";

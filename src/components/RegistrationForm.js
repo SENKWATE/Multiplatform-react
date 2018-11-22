@@ -22,11 +22,6 @@ class RegistationForm extends Component {
   componentWillUnmount() {
     this.props.resetForm();
   }
-  // componentDidUpdate(){
-  //   if(this.props.match.params !== prevProps.match.params){
-  //     this.props.resetForm();
-  //   }
-  // }
 
   changeHandler(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -60,8 +55,12 @@ class RegistationForm extends Component {
               ? "Login to send messages"
               : "Register an account"}
           </h5>
-
-          <form onSubmit={this.submitHandler} noValidate>
+          {errors.non_field_errors && (
+            <div className="alert alert-danger" role="alert">
+              {errors.non_field_errors}
+            </div>
+          )}
+          <form onSubmit={this.submitHandler}>
             <div className="form-group">
               <input
                 className="form-control"
@@ -72,6 +71,9 @@ class RegistationForm extends Component {
                 onChange={this.changeHandler}
               />
             </div>
+            {errors.username && (
+              <div className="invalid-feedback">{errors.username}</div>
+            )}
             <div className="form-group">
               <input
                 className="form-control"
@@ -82,6 +84,9 @@ class RegistationForm extends Component {
                 onChange={this.changeHandler}
               />
             </div>
+            {errors.password && (
+              <div className="invalid-feedback">{errors.password}</div>
+            )}
             {type !== "login" && (
               <div>
                 <div className="form-group">
@@ -142,7 +147,7 @@ class RegistationForm extends Component {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  errors: state.auth.errors
+  errors: state.errors
 });
 const mapDispatchToProps = dispatch => {
   return {

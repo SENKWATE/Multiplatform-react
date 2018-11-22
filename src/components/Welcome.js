@@ -4,26 +4,25 @@ import { connect } from "react-redux";
 import * as actionCreators from "../store/actions/authentication";
 
 class Welcome extends Component {
-  // componentDidMount() {
-  //    this.props.checkToken();
-  //  }
-
   render() {
+    let category = this.props.category.map(name => name.name);
+    let types = this.props.category.map(name =>
+      name.item_types.map(a => a.name)
+    );
+
+    console.log("category:");
+    console.log(category);
+    console.log("types:");
+    console.log(types);
+
     return (
-      <header className="masthead d-flex ">
+      <header className="masthead d-flex" style={{ marginRight: 300 }}>
         <div className="container text-center my-auto z-1">
           <h1 className="mb-1 title">WELCOME TO CHATR</h1>
-          <h3 className="mb-5">
-            <p className="description" style={{ marginTop: 40 }}>
-              In this application, you can share, with your friends, all the
-              activites that you like with all over people around the world. In
-              addition, you can create a channel that you and other people like
-              to share common ideas.
-            </p>
-          </h3>
+
           {this.props.user ? null : (
             <div>
-              <h3 className="mb-5">
+              <h3 className="mb-5" style={{ marginTop: 100 }}>
                 <em className="description" style={{ fontSize: 40 }}>
                   What are you waiting for...??? Sign-in or signup to join with
                   your friends
@@ -51,7 +50,8 @@ class Welcome extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.auth.user
+  user: state.auth.user,
+  category: state.category.items
 });
 
 const mapDispatchToProps = dispatch => ({

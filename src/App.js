@@ -2,23 +2,27 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-
-// import components
+import * as actionCreators from "./store/actions/category";
+// import compoimport * as actionCreators from "../store/actions/category";nents
 import RegistrationForm from "./components/RegistrationForm";
 import Welcome from "./components/Welcome";
 import NavBar from "./components/Navigation/NavBar";
+import Category from "./components/Category";
 
 import { Provider } from "react-redux";
 import store from "./store";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchItems();
+  }
   render() {
     return (
       <div className="content-wrapper">
         <NavBar />
         <Switch>
           <Route path="/welcome" component={Welcome} />
-
+          <Route path="/category" component={Category} />
           <Route path="/(login|signup)" component={RegistrationForm} />
           <Redirect to="/welcome" />
         </Switch>
@@ -27,4 +31,13 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  fetchItems: () => dispatch(actionCreators.fetchItems())
+});
+
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(App)
+);

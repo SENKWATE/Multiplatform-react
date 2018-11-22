@@ -48,7 +48,8 @@ export const login = (userData, history) => {
         history.push("/");
       })
       .catch(err => {
-        dispatch(setErrors(err));
+        console.log(err.response.data);
+        dispatch(setErrors(err.response.data));
       });
   };
 };
@@ -66,7 +67,9 @@ export const signup = (userData, history) => {
         )
       )
       .then(() => history.push("/"))
-      .catch(error => console.log(error));
+      .catch(err => {
+        dispatch(setErrors(err.response.data));
+      });
   };
 };
 
