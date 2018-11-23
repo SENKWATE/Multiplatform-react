@@ -1,7 +1,8 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  items: []
+  items: [],
+  categoryNames: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -9,7 +10,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.FETCH_ITEMS:
       return {
         ...state,
-        items: action.payload
+        items: action.payload,
+        categoryNames: action.payload.map(name => name.name)
       };
     default:
       return state;

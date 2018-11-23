@@ -7,7 +7,7 @@ import * as actionCreators from "./store/actions/category";
 import RegistrationForm from "./components/RegistrationForm";
 import Welcome from "./components/Welcome";
 import NavBar from "./components/Navigation/NavBar";
-import Category from "./components/Category";
+import Types from "./components/Types";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -21,8 +21,8 @@ class App extends Component {
       <div className="content-wrapper">
         <NavBar />
         <Switch>
+          <Route path="/types/:type" component={Types} />
           <Route path="/welcome" component={Welcome} />
-          <Route path="/category" component={Category} />
           <Route path="/(login|signup)" component={RegistrationForm} />
           <Redirect to="/welcome" />
         </Switch>
