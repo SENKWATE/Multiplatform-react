@@ -11,8 +11,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import * as actionCreators from "../../store/actions/authentication";
+import Popup from "../Popup";
 
 class AuthButton extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showPopup: false
+    };
+  }
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  }
   render() {
     const user = this.props.user;
     let buttons, buttons2;
@@ -46,7 +58,11 @@ class AuthButton extends Component {
             <FontAwesomeIcon icon={faUserCircle} /> {user.username}
           </span>
           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <Link to="/welcome" className="dropdown-item">
+            <Link
+              to="/welcome"
+              className="dropdown-item"
+              onClick={this.togglePopup.bind(this)}
+            >
               View Profile
             </Link>
             <div class="dropdown-divider" />
@@ -80,6 +96,9 @@ class AuthButton extends Component {
         {/* <span className="navbar-text">{user.username}</span> */}
         {buttons2}
         {/*buttons*/}
+        {this.state.showPopup ? (
+          <Popup text="Close Me" closePopup={this.togglePopup.bind(this)} />
+        ) : null}
       </ul>
     );
   }

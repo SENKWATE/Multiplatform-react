@@ -3,8 +3,20 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actionCreators from "../store/actions/authentication";
 import Types from "./Types";
+import Popup from "./Popup";
 
 class Welcome extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showPopup: false
+    };
+  }
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  }
   render() {
     let category = this.props.category.map(
       type => (
@@ -66,6 +78,10 @@ class Welcome extends Component {
             {category}
           </div>
         </div>
+        <button onClick={this.togglePopup.bind(this)}>show popup</button>
+        {this.state.showPopup ? (
+          <Popup text="Close Me" closePopup={this.togglePopup.bind(this)} />
+        ) : null}
       </div>
     );
   }
