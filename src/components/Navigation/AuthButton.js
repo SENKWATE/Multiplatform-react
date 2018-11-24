@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSignOutAlt,
   faSignInAlt,
-  faUserPlus
+  faUserPlus,
+  faUserCircle
 } from "@fortawesome/free-solid-svg-icons";
 
 import * as actionCreators from "../../store/actions/authentication";
@@ -14,7 +15,7 @@ import * as actionCreators from "../../store/actions/authentication";
 class AuthButton extends Component {
   render() {
     const user = this.props.user;
-    let buttons;
+    let buttons, buttons2;
     console.log(this.props.user);
 
     if (user) {
@@ -31,8 +32,36 @@ class AuthButton extends Component {
           </span>
         </li>
       );
+      buttons2 = (
+        <li className="nav-item dropdown navbar-brand" style={{ width: 100 }}>
+          <span
+            className="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <FontAwesomeIcon icon={faUserCircle} /> {user.username}
+          </span>
+          <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+            <Link to="/welcome" className="dropdown-item">
+              View Profile
+            </Link>
+            <div class="dropdown-divider" />
+            <Link
+              to="/welcome"
+              className="dropdown-item"
+              onClick={this.props.logout}
+            >
+              Logout
+            </Link>
+          </div>
+        </li>
+      );
     } else {
-      buttons = [
+      buttons2 = [
         <li key="loginButton" className="nav-item">
           <Link to="/login" className="nav-link">
             <FontAwesomeIcon icon={faSignInAlt} /> Login
@@ -49,7 +78,8 @@ class AuthButton extends Component {
     return (
       <ul className="navbar-nav ml-auto">
         {/* <span className="navbar-text">{user.username}</span> */}
-        {buttons}
+        {buttons2}
+        {/*buttons*/}
       </ul>
     );
   }

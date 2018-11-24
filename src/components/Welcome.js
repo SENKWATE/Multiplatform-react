@@ -10,14 +10,17 @@ class Welcome extends Component {
       type => (
         console.log(type),
         (
-          <Link
-            className="dropdown-item"
-            to={`/types/${type.id}`}
-            key={type.name}
-            type={type}
-          >
-            {type.name}
-          </Link>
+          <li class="list-group-item">
+            {" "}
+            <Link
+              className="dropdown-item"
+              to={`/types/${type.id}`}
+              key={type.name}
+              type={type}
+            >
+              {type.name}
+            </Link>
+          </li>
         )
       )
     );
@@ -36,8 +39,17 @@ class Welcome extends Component {
     // console.log(types);
 
     return (
-      <div className="jumbotron" style={{ width: 500 }}>
-        <h1>{category}</h1>
+      <div
+        className=""
+        style={{ width: 300, marginTop: 100, borderRadius: 25 }}
+      >
+        <div
+          className="card text-center"
+          style={{ width: 200, borderRadius: 25, marginLeft: 10 }}
+        >
+          <div className="card-header">Categories</div>
+          <ul className="list-group list-group-flush">{category}</ul>
+        </div>
 
         <div className="dropdown">
           <button
