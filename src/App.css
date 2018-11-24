@@ -1,3 +1,16 @@
+.profile {
+  font-family: "Audiowide", cursive;
+  color: white;
+  font-size: 60px;
+  margin-top: 10px;
+}
+
+.Pcontent {
+  font-family: "Audiowide", cursive;
+  color: white;
+  font-size: 25px;
+}
+
 .popup {
   position: fixed;
   width: 100%;
@@ -17,6 +30,7 @@
   bottom: 25%;
   margin: auto;
   background: white;
+  border: 7px solid #37acde;
 }
 
 .category {

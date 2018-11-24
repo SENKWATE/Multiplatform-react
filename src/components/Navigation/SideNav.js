@@ -49,7 +49,7 @@ class SideNav extends React.Component {
               >
                 <div className="nav-link heading text-center">
                   <FontAwesomeIcon icon={faGavel} style={{ fontSize: 25 }} />
-                  <span className="nav-link-text mr-2"> Auctions</span>
+                  <span className="nav-link-text mr-2"> My Auctions</span>
                 </div>
               </li>
 

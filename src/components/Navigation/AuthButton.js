@@ -97,7 +97,7 @@ class AuthButton extends Component {
         {buttons2}
         {/*buttons*/}
         {this.state.showPopup ? (
-          <Popup text="Close Me" closePopup={this.togglePopup.bind(this)} />
+          <Popup closePopup={this.togglePopup.bind(this)} />
         ) : null}
       </ul>
     );
