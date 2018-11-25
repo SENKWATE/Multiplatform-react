@@ -92,7 +92,6 @@ class SideNav extends React.Component {
 }
 const mapStateToProps = state => ({
   user: state.auth.user
-  // channels: state.auth.channels
 });
 
 const mapDispatchToProps = dispatch => {

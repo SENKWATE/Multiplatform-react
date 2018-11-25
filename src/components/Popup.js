@@ -21,11 +21,16 @@ class Popup extends React.Component {
       let birth_date = (
         <p>Birth Date: {this.props.profile.profile.birth_date}</p>
       );
+
       return (
         <div className="popup">
           <div
             className="popup_inner"
-            style={{ borderRadius: 25, backgroundColor: "rgba(33,77,120)" }}
+            style={{
+              borderRadius: 25,
+              backgroundColor: "rgba(33,77,120)",
+              overflowY: "auto"
+            }}
           >
             <h1 className="text-center profile">{`Profile`}</h1>
             <div className="Pcontent text-center">

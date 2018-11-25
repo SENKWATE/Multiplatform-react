@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import * as actionCreators from "../store/actions/authentication";
 import Types from "./Types";
 import Popup from "./Popup";
+import ItemCard from "./ItemCard";
 
 class Welcome extends Component {
   render() {
@@ -11,7 +12,7 @@ class Welcome extends Component {
       type => (
         console.log(type),
         (
-          <li class="list-group-item">
+          <li className="list-group-item">
             {" "}
             <Link
               className="dropdown-item"
@@ -29,7 +30,7 @@ class Welcome extends Component {
     let items = this.props.category.map(category =>
       category.item_types.map(itemType =>
         itemType.items.map(item => (
-          <div className="card" style={{ width: 200 }}>
+          <div className="card" style={{ width: 200, marginLeft: 30 }}>
             <img
               className="card-img-top"
               src={item.logo}
@@ -44,6 +45,12 @@ class Welcome extends Component {
             </div>
           </div>
         ))
+      )
+    );
+
+    let itemcards = this.props.category.map(category =>
+      category.item_types.map(itemType =>
+        itemType.items.map(item => <ItemCard key={item.name} item={item} />)
       )
     );
 
@@ -63,18 +70,19 @@ class Welcome extends Component {
     // console.log(types);
 
     return (
-      <div
-        className=""
-        style={{ width: 300, marginTop: 100, borderRadius: 25 }}
-      >
-        {/*<div
+      <div className="" style={{ marginTop: 100 }}>
+        <div className="container" style={{ height: 600, overflow: "auto" }}>
+          {/*<div
           className="card text-center"
           style={{ width: 200, borderRadius: 25, marginLeft: 10 }}
         >
           <div className="card-header">Categories</div>
           <ul className="list-group list-group-flush">{category}</ul>
         </div>*/}
-        {items}
+          <div className="jumbotron">
+            <div className="row">{itemcards}</div>
+          </div>
+        </div>
       </div>
     );
   }

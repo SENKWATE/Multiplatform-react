@@ -26,7 +26,7 @@ class Types extends Component {
     // console.log(products);
 
     return (
-      <div className="jumbotron">
+      
         <h1>{name}</h1>
 
         <div className="dropdown">
@@ -44,7 +44,7 @@ class Types extends Component {
             {products}
           </div>
         </div>
-      </div>
+
     );
   }
 }
