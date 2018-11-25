@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actionCreators from "../store/actions/authentication";
 import * as actionErrors from "../store/actions/errors";
+import * as actionProfile from "../store/actions/profile";
 
 class RegistationForm extends Component {
   constructor(props) {
@@ -156,7 +157,8 @@ const mapDispatchToProps = dispatch => {
     login: (userData, history) =>
       dispatch(actionCreators.login(userData, history)),
 
-    resetForm: () => dispatch(actionErrors.setErrors({}))
+    resetForm: () => dispatch(actionErrors.setErrors({})),
+    getProfile: userID => dispatch(actionProfile.fetchProfileDetail(userID))
   };
 };
 

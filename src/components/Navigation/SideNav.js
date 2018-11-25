@@ -39,7 +39,7 @@ class SideNav extends React.Component {
               className="navbar-nav navbar-sidenav"
               id="exampleAccordion"
               style={{
-                backgroundColor: "rgba(0, 0, 0, 0.8)"
+                backgroundColor: "#6663BD"
               }}
             >
               <li
@@ -47,7 +47,10 @@ class SideNav extends React.Component {
                 data-toggle="tooltip"
                 data-placement="right"
               >
-                <div className="nav-link heading text-center">
+                <div
+                  className="nav-link heading text-center"
+                  style={{ color: "white" }}
+                >
                   <FontAwesomeIcon icon={faGavel} style={{ fontSize: 25 }} />
                   <span className="nav-link-text mr-2"> My Auctions</span>
                 </div>
@@ -68,6 +71,7 @@ class SideNav extends React.Component {
                 <span
                   className="nav-link text-center"
                   id="sidenavToggler"
+                  style={{ backgroundColor: "#3E39C3" }}
                   onClick={() =>
                     this.setState(prevState => ({
                       collapsed: !prevState.collapsed

@@ -7,14 +7,13 @@ class Popup extends React.Component {
   componentDidMount() {
     this.props.getProfile(this.props.user.user_id);
   }
-
   render() {
     let bio; // = (
     //   <p style={{ marginLeft: 100 }}>Bio: {this.props.profile.profile.bio}</p>
     // );
 
-    console.log(this.props.profile);
-    //  console.log(this.props.profile.profile.bio);
+    console.log("USER", this.props.profile);
+    console.log("PROFILE", this.props.profile.profile);
     return (
       <div className="popup">
         <div

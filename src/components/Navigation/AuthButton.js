@@ -54,12 +54,13 @@ class AuthButton extends Component {
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
+            style={{ fontSize: 20 }}
           >
             <FontAwesomeIcon icon={faUserCircle} /> {user.username}
           </span>
           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
             <Link
-              to="/welcome"
+              to="#"
               className="dropdown-item"
               onClick={this.togglePopup.bind(this)}
             >
@@ -79,12 +80,12 @@ class AuthButton extends Component {
     } else {
       buttons2 = [
         <li key="loginButton" className="nav-item">
-          <Link to="/login" className="nav-link">
+          <Link to="/login" className="nav-link" style={{ fontSize: 18 }}>
             <FontAwesomeIcon icon={faSignInAlt} /> Login
           </Link>
         </li>,
         <li key="signupButton" className="nav-item">
-          <Link to="/signup" className="nav-link">
+          <Link to="/signup" className="nav-link" style={{ fontSize: 18 }}>
             <FontAwesomeIcon icon={faUserPlus} /> Signup
           </Link>
         </li>

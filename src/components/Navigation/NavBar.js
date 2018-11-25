@@ -32,17 +32,17 @@ class NavBar extends Component {
 
     return (
       <nav
-        className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+        className="navbar navbar-expand-lg navbar-dark fixed-top"
         id="mainNav"
-        style={{ height: 70 }}
+        style={{ height: 60, backgroundColor: "#39359B" }}
       >
         <Link
           className="navbar-brand"
           to="/welcome"
-          style={{ width: 50 }}
+          style={{ width: 50, marginRight: 50 }}
           onClick={() => this.categoryName("Category")}
         >
-          Home
+          Main-Menu
         </Link>
         <li className="nav-item dropdown navbar-brand">
           <a

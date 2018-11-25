@@ -26,6 +26,29 @@ class Welcome extends Component {
       )
     );
 
+    let items = this.props.category.map(category =>
+      category.item_types.map(itemType =>
+        itemType.items.map(item => (
+          <div className="card" style={{ width: 200 }}>
+            <img
+              className="card-img-top"
+              src={item.logo}
+              alt="Card image cap"
+            />
+            <div className="card-body">
+              <h5 className="card-title">{item.name}</h5>
+              <p className="card-text">{item.description}</p>
+              <a href="#" className="btn btn-primary">
+                See Detail
+              </a>
+            </div>
+          </div>
+        ))
+      )
+    );
+
+    console.log("items:");
+    console.log(items);
     // let types = this.props.category.map(name =>
     //   name.item_types.map(a => (
     //     <button className="dropdown-item" type="button">
@@ -44,29 +67,14 @@ class Welcome extends Component {
         className=""
         style={{ width: 300, marginTop: 100, borderRadius: 25 }}
       >
-        <div
+        {/*<div
           className="card text-center"
           style={{ width: 200, borderRadius: 25, marginLeft: 10 }}
         >
           <div className="card-header">Categories</div>
           <ul className="list-group list-group-flush">{category}</ul>
-        </div>
-
-        <div className="dropdown">
-          <button
-            className="btn btn-secondary dropdown-toggle"
-            type="button"
-            id="dropdownMenu2"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Category
-          </button>
-          <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-            {category}
-          </div>
-        </div>
+        </div>*/}
+        {items}
       </div>
     );
   }

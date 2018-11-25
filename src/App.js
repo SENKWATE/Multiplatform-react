@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actionCreators from "./store/actions/category";
+import * as actionProfile from "./store/actions/profile";
 // import compoimport * as actionCreators from "../store/actions/category";nents
 import RegistrationForm from "./components/RegistrationForm";
 import Welcome from "./components/Welcome";
@@ -16,6 +17,7 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchItems();
   }
+
   render() {
     return (
       <div className="content-wrapper">
@@ -31,8 +33,13 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
 const mapDispatchToProps = dispatch => ({
-  fetchItems: () => dispatch(actionCreators.fetchItems())
+  fetchItems: () => dispatch(actionCreators.fetchItems()),
+  getProfile: userID => dispatch(actionProfile.fetchProfileDetail(userID))
 });
 
 export default withRouter(
