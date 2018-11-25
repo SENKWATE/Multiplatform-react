@@ -10,4 +10,4 @@ export { setErrors } from "./errors";
 
 export { fetchItems } from "./category";
 
-export { fetchProfileDetail } from "./profile";
+export { fetchProfileDetail, setLoading } from "./profile";
