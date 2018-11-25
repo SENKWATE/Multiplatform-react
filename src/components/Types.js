@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actionCreators from "../store/actions/category";
 
+// Components
+import ItemCard from "./ItemCard";
+
 class Types extends Component {
   render() {
     const typeID = this.props.match.params.type;
@@ -10,6 +13,7 @@ class Types extends Component {
     const type = this.props.items.filter(obj => obj.id.toString() === typeID);
     const name = type.map(content => content.name);
     // const itemTypes = type.map(content => content.item_types);
+
     let products = type.map(content =>
       content.item_types.map(a => (
         <button className="dropdown-item" type="button">
@@ -18,33 +22,52 @@ class Types extends Component {
       ))
     );
 
+    // let itemcards = this.props.category.map(category =>
+    //   category.item_types.map(itemType =>
+    //     itemType.items.map(item => <ItemCard key={item.name} item={item} />)
+    //   )
+    // );
+
+    let containers = type.map(content =>
+      content.item_types.map(container => (
+        <div
+          className="container"
+          style={{ height: 500, overflow: "auto", marginTop: 40 }}
+        >
+          <h1 className="text-center typeshape">
+            <strong>{container.name}</strong>
+          </h1>
+          <div
+            className="jumbotron"
+            style={{ height: 400, backgroundColor: "#D9D8F9" }}
+          >
+            <div className="row">
+              {container.items.map(item => (
+                <ItemCard key={item.name} item={item} />
+              ))}{" "}
+            </div>
+          </div>
+        </div>
+      ))
+    );
+
     // console.log("item_type:");
     // console.log(itemTypes);
     // console.log("Current:");
-    // console.log(type);
+    console.log("Current", type);
     // console.log("names:");
     // console.log(products);
 
     return (
-      
-        <h1>{name}</h1>
-
-        <div className="dropdown">
-          <button
-            className="btn btn-secondary dropdown-toggle"
-            type="button"
-            id="dropdownMenu2"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Types
-          </button>
-          <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-            {products}
-          </div>
-        </div>
-
+      <div>
+        <h1
+          className="text-center typeTitle"
+          style={{ marginTop: 50, fontSize: 60 }}
+        >
+          {name}
+        </h1>
+        {containers}
+      </div>
     );
   }
 }
