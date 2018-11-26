@@ -31,7 +31,7 @@ class Types extends Component {
     let containers = type.map(content =>
       content.item_types.map(container => (
         <div
-          className="container"
+          className="container ::-webkit-scrollbar ::-webkit-scrollbar-track ::-webkit-scrollbar-thumb ::-webkit-scrollbar-thumb:hover"
           style={{ height: 500, overflow: "auto", marginTop: 40 }}
         >
           <h1 className="text-center typeshape">

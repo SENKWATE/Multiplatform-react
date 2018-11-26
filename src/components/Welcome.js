@@ -71,7 +71,10 @@ class Welcome extends Component {
 
     return (
       <div className="" style={{ marginTop: 100 }}>
-        <div className="container" style={{ height: 600, overflow: "auto" }}>
+        <div
+          className="container ::-webkit-scrollbar ::-webkit-scrollbar-track ::-webkit-scrollbar-thumb ::-webkit-scrollbar-thumb:hover"
+          style={{ height: 600, overflow: "auto" }}
+        >
           {/*<div
           className="card text-center"
           style={{ width: 200, borderRadius: 25, marginLeft: 10 }}
