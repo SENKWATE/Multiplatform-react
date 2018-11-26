@@ -33,9 +33,9 @@ class ItemDetail extends Component {
     if (prevProps.match.params.itemID !== this.props.match.params.itemID) {
       this.getItem();
     }
-    //  if (this.state.time === 0) {
-    //  clearInterval(this.interval);
-    //  }
+    // if (this.state.time === 0) {
+    //   clearInterval(this.interval);
+    // }
   }
 
   getItem() {
@@ -63,7 +63,9 @@ class ItemDetail extends Component {
       current_month = date.getMonth() + 1,
       current_day = date.getDate(),
       current_hour = date.getHours(),
-      current_min = date.getMinutes();
+      current_min = date.getMinutes(),
+      current_sec = date.getSeconds();
+
     if (dateTime) {
       let year = parseInt(dateTime.slice(0, 4), 10);
       let month = parseInt(dateTime.slice(5, 7), 10);
@@ -76,8 +78,8 @@ class ItemDetail extends Component {
       let day_difference = day - current_day;
       let hour_difference = 23 - current_hour;
       let min_difference = 60 - current_min;
-
-      console.log(hour_difference);
+      let sec_difference = 60 - current_sec;
+      //  console.log(60 - date.getSeconds());
 
       if (year_difference < 0) {
         year_difference = year_difference * -1;
@@ -121,14 +123,32 @@ class ItemDetail extends Component {
               "min."
             );
           } else {
-            if (hour - current_hour) {
-              return hour - current_hour + "h and " + min_difference + "min.";
+            if (hour - current_hour > 1) {
+              return (
+                hour -
+                current_hour +
+                "h," +
+                min_difference +
+                "min, and " +
+                sec_difference +
+                "sec"
+              );
             } else {
-              if (min - current_min > 0) {
-                return min - current_min + "min.";
+              if (hour - current_hour === 1) {
+                return min_difference + "min, and " + sec_difference + "sec";
               } else {
-                // show seconds only
-                return "The bidding is finished";
+                if (min - current_min > 1) {
+                  return (
+                    min - current_min - 1 + "min and " + sec_difference + "sec"
+                  );
+                } else {
+                  // show seconds only
+                  if (min - current_min === 1) {
+                    return sec_difference + "sec";
+                  } else {
+                    return "The bidding is finished";
+                  }
+                }
               }
             }
           }
@@ -139,7 +159,15 @@ class ItemDetail extends Component {
 
   render() {
     const item = this.props.itemDetail;
-
+    let amount;
+    let name;
+    if (item.biddings) {
+      amount = item.biddings.map(a => a.amount);
+      name = item.biddings.map(a => a.user.username);
+    }
+    // let s = name.length;
+    console.log("username:", name);
+    console.log("amount", amount);
     return (
       <div className="card mb-3">
         <h5
@@ -155,10 +183,15 @@ class ItemDetail extends Component {
           alt="Card image cap"
         />
         <div className="card-body">
-          <p className="card-text">
-            <h3>Description:</h3> <div>{item.description}</div>
-          </p>
-          <p className="card-text">
+          {amount ? (
+            <h1 className="text-center">
+              {" "}
+              Initial Price: {amount}
+              K.D{" "}
+            </h1>
+          ) : null}
+
+          <p className="card-text text-center" style={{ fontSize: 30 }}>
             <small className="text-muted">
               End date: {this.getDate(item.end_date)}
             </small>
@@ -169,9 +202,12 @@ class ItemDetail extends Component {
             </div>
             <div>
               <small className="text-muted">
-                Remanining time left: {this.getRemainingTime(item.end_date)}
+                Remaining time left: {this.getRemainingTime(item.end_date)}
               </small>
             </div>
+          </p>
+          <p className="card-text text-center">
+            <h3>Description:</h3> <div>{item.description}</div>
           </p>
         </div>
       </div>
