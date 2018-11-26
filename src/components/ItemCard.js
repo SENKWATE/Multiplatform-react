@@ -11,6 +11,7 @@ class ItemCard extends Component {
 
   render() {
     const item = this.props.item;
+
     return (
       <div className="mb-2">
         <Link
