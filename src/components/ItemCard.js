@@ -14,7 +14,7 @@ class ItemCard extends Component {
     return (
       <div className="mb-2">
         <Link
-          to={`items/${item.id}/`}
+          to={`/items/${item.id}/`}
           className="card"
           style={{
             width: 340,
