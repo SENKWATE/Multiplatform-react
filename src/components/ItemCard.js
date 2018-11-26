@@ -1,13 +1,20 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect, withRouter } from "react-router-dom";
 
 class ItemCard extends Component {
+  getDate(date) {
+    if (date) {
+      date = date.slice(0, 10);
+      return date;
+    }
+  }
+
   render() {
     const item = this.props.item;
     return (
       <div className="mb-2">
         <Link
-          to="/welcome"
+          to={`items/${item.id}/`}
           className="card"
           style={{
             width: 340,
@@ -21,12 +28,16 @@ class ItemCard extends Component {
               className="card-img-top img-fluid"
               src={item.logo}
               alt={item.name}
-              style={{ height: 200 }}
+              style={{ height: 230 }}
             />
           </div>
           <div className="card-body">
             <h5 className="card-title text-center" style={{ color: "white" }}>
               <span>{item.name}</span>
+              <div style={{ fontSize: 15 }}>
+                {" "}
+                End Date: {this.getDate(item.end_date)}
+              </div>
             </h5>
           </div>
         </Link>
@@ -35,4 +46,4 @@ class ItemCard extends Component {
   }
 }
 
-export default ItemCard;
+export default withRouter(ItemCard);

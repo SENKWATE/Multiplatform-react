@@ -9,6 +9,7 @@ import RegistrationForm from "./components/RegistrationForm";
 import Welcome from "./components/Welcome";
 import NavBar from "./components/Navigation/NavBar";
 import Types from "./components/Types";
+import ItemDetail from "./components/ItemDetail";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -23,6 +24,7 @@ class App extends Component {
       <div className="content-wrapper">
         <NavBar />
         <Switch>
+          <Route path="/items/:itemID" component={ItemDetail} />
           <Route path="/types/:type" component={Types} />
           <Route path="/welcome" component={Welcome} />
           <Route path="/(login|signup)" component={RegistrationForm} />

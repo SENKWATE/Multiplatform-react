@@ -8,6 +8,6 @@ export {
 
 export { setErrors } from "./errors";
 
-export { fetchItems } from "./category";
+export { fetchItems, fetchItemDetail } from "./category";
 
 export { fetchProfileDetail, setLoading } from "./profile";
