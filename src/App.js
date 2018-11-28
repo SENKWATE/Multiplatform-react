@@ -10,6 +10,7 @@ import Welcome from "./components/Welcome";
 import NavBar from "./components/Navigation/NavBar";
 import Types from "./components/Types";
 import ItemDetail from "./components/ItemDetail";
+import Footer from "./components/Footer";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -30,6 +31,7 @@ class App extends Component {
           <Route path="/(login|signup)" component={RegistrationForm} />
           <Redirect to="/welcome" />
         </Switch>
+        <Footer />
       </div>
     );
   }

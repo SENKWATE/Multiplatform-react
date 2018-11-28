@@ -2,16 +2,18 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import * as actionCreators from "../store/actions/category";
-
+import { Link } from "react-router-dom";
 // Components
 import Loading from "./Loading";
+import BiddingForm from "./BiddingForm";
 
 class ItemDetail extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      time: 5
+      time: 5,
+      bidding: true
     };
   }
 
@@ -79,7 +81,6 @@ class ItemDetail extends Component {
       let hour_difference = 23 - current_hour;
       let min_difference = 60 - current_min;
       let sec_difference = 60 - current_sec;
-      //  console.log(60 - date.getSeconds());
 
       if (year_difference < 0) {
         year_difference = year_difference * -1;
@@ -108,45 +109,60 @@ class ItemDetail extends Component {
           " days."
         );
       } else {
-        if (month_difference > 0) {
+        if (month_difference > 1) {
           return (
             month_difference + " months " + "and " + day_difference + " days."
           );
         } else {
-          if (day_difference > 0) {
-            return (
-              day_difference +
-              " days, " +
-              hour_difference +
-              "h ,and " +
-              min_difference +
-              "min."
-            );
+          if (month_difference === 1) {
+            return day_difference + " days.";
           } else {
-            if (hour - current_hour > 1) {
+            if (day_difference > 1) {
               return (
-                hour -
-                current_hour +
-                "h," +
+                day_difference +
+                " days, " +
+                hour_difference +
+                "h ,and " +
                 min_difference +
-                "min, and " +
-                sec_difference +
-                "sec"
+                "min."
               );
             } else {
-              if (hour - current_hour === 1) {
-                return min_difference + "min, and " + sec_difference + "sec";
+              if (day_difference === 1) {
+                return hour_difference + "h ,and " + min_difference + "min.";
               } else {
-                if (min - current_min > 1) {
+                if (hour - current_hour > 1) {
                   return (
-                    min - current_min - 1 + "min and " + sec_difference + "sec"
+                    hour -
+                    current_hour +
+                    "h," +
+                    min_difference +
+                    "min, and " +
+                    sec_difference +
+                    "sec"
                   );
                 } else {
-                  // show seconds only
-                  if (min - current_min === 1) {
-                    return sec_difference + "sec";
+                  if (hour - current_hour === 1) {
+                    return (
+                      min_difference + "min, and " + sec_difference + "sec"
+                    );
                   } else {
-                    return "The bidding is finished";
+                    if (min - current_min > 1) {
+                      return (
+                        min -
+                        current_min -
+                        1 +
+                        "min and " +
+                        sec_difference +
+                        "sec"
+                      );
+                    } else {
+                      // show seconds only
+                      if (min - current_min === 1) {
+                        return sec_difference + "sec";
+                      } else {
+                        return "The bidding is finished";
+                      }
+                    }
                   }
                 }
               }
@@ -183,13 +199,7 @@ class ItemDetail extends Component {
           alt="Card image cap"
         />
         <div className="card-body">
-          {amount ? (
-            <h1 className="text-center">
-              {" "}
-              Initial Price: {amount}
-              K.D{" "}
-            </h1>
-          ) : null}
+          <h1 className="text-center">Bidding price: {amount} K.D</h1>
 
           <p className="card-text text-center" style={{ fontSize: 30 }}>
             <small className="text-muted">
@@ -210,6 +220,16 @@ class ItemDetail extends Component {
             <h3>Description:</h3> <div>{item.description}</div>
           </p>
         </div>
+        {this.props.user ? (
+          <BiddingForm item={item} amount={amount} />
+        ) : (
+          <small className="text-center">
+            <Link to="/login" style={{ color: "red" }}>
+              {" "}
+              Sign or sign up to bid on this item
+            </Link>
+          </small>
+        )}
       </div>
     );
   }
@@ -217,7 +237,8 @@ class ItemDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    itemDetail: state.category.item
+    itemDetail: state.category.item,
+    user: state.auth.user
   };
 };
 

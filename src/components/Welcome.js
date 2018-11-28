@@ -56,6 +56,8 @@ class Welcome extends Component {
 
     console.log("items:");
     console.log(items);
+    console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
+
     // let types = this.props.category.map(name =>
     //   name.item_types.map(a => (
     //     <button className="dropdown-item" type="button">
