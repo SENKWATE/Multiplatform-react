@@ -5,6 +5,7 @@ import * as actionCreators from "../store/actions/authentication";
 import Types from "./Types";
 import Popup from "./Popup";
 import ItemCard from "./ItemCard";
+import SearchBar from "./SearchBar";
 
 class Welcome extends Component {
   render() {
@@ -48,9 +49,21 @@ class Welcome extends Component {
       )
     );
 
-    let itemcards = this.props.category.map(category =>
-      category.item_types.map(itemType =>
-        itemType.items.map(item => <ItemCard key={item.name} item={item} />)
+    // let itemcards = this.props.category.map(category =>
+    //   category.item_types.map(itemType =>
+    //     itemType.items.map(
+    //       item => (
+    //         console.log("card1", item), <ItemCard key={item.name} item={item} />
+    //       )
+    //     )
+    //   )
+    // );
+
+    let itemcards = this.props.filterItems.map(item =>
+      item.map(a =>
+        a.map(
+          b => (console.log("card2", b), <ItemCard key={b.name} item={b} />)
+        )
       )
     );
 
@@ -73,6 +86,7 @@ class Welcome extends Component {
 
     return (
       <div className="" style={{ marginTop: 100 }}>
+        <SearchBar />
         <div
           className="container ::-webkit-scrollbar ::-webkit-scrollbar-track ::-webkit-scrollbar-thumb ::-webkit-scrollbar-thumb:hover"
           style={{ height: 600, overflow: "auto" }}
@@ -95,7 +109,8 @@ class Welcome extends Component {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  category: state.category.items
+  category: state.category.items,
+  filterItems: state.category.filterItems
 });
 
 const mapDispatchToProps = dispatch => ({

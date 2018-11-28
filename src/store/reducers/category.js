@@ -3,7 +3,9 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
   items: [],
   categoryNames: [],
-  item: []
+  item: [],
+  filterItems: [],
+  typeItems: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -12,12 +14,29 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         items: action.payload,
-        categoryNames: action.payload.map(name => name.name)
+        categoryNames: action.payload.map(name => name.name),
+        filterItems: action.payload.map(category =>
+          category.item_types.map(itemType => itemType.items.map(item => item))
+        )
       };
+
     case actionTypes.FETCH_ITEM_DETAIL:
       return {
         ...state,
         item: action.payload
+      };
+    case actionTypes.FILTER_ITEMS:
+      return {
+        ...state,
+        filterItems: state.items.map(category =>
+          category.item_types.map(itemType =>
+            itemType.items.filter(item => {
+              return `${item.name}`
+                .toLowerCase()
+                .includes(action.payload.toLowerCase());
+            })
+          )
+        )
       };
     default:
       return state;

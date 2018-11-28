@@ -5,7 +5,7 @@ import * as actionCreators from "../store/actions/category";
 
 // Components
 import ItemCard from "./ItemCard";
-
+import SearchBar from "./SearchBar";
 class Types extends Component {
   render() {
     const typeID = this.props.match.params.type;
@@ -73,7 +73,7 @@ class Types extends Component {
         >
           {name}
         </h1>
-
+        <SearchBar />
         <div className="container text-center col-md-2 col-md-offset-3">
           <div className="card " style={{ width: 220, borderRadius: 8 }}>
             <div className="card-header">Jump to</div>
@@ -88,7 +88,8 @@ class Types extends Component {
 }
 
 const mapStateToProps = state => ({
-  items: state.category.items
+  items: state.category.items,
+  filterItems: state.category.filterItems
 });
 
 const mapDispatchToProps = dispatch => ({

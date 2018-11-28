@@ -39,3 +39,10 @@ export const fetchItemDetail = itemID => {
       .catch(err => console.error(err));
   };
 };
+
+export const filterItems = query => {
+  return {
+    type: actionTypes.FILTER_ITEMS,
+    payload: query
+  };
+};
