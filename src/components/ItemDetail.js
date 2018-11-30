@@ -18,12 +18,8 @@ class ItemDetail extends Component {
   }
 
   componentDidMount() {
-    this.getItem();
     //  if (this.state.time > 0) {
-    this.interval = setInterval(
-      () => this.setState({ time: this.state.time - 1 }),
-      1000
-    );
+    this.interval = setInterval(() => this.getItem(), 1000);
     //  }
   }
 
