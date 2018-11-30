@@ -10,7 +10,15 @@ class Types extends Component {
   render() {
     const typeID = this.props.match.params.type;
 
-    const type = this.props.items.filter(obj => obj.id.toString() === typeID);
+    console.log("ID:", typeID);
+    const type = this.props.items.filter(
+      obj => (console.log("obj:", obj), obj.id.toString() === typeID)
+    );
+
+    // const type2 = this.props.typeItems.filter(a => a.id.toString() === typeID);
+    //
+    // console.log(type2);
+
     const name = type.map(content => content.name);
     // const itemTypes = type.map(content => content.item_types);
 
@@ -73,7 +81,7 @@ class Types extends Component {
         >
           {name}
         </h1>
-        <SearchBar />
+        <SearchBar id={this.props.match.params.type} />
         <div className="container text-center col-md-2 col-md-offset-3">
           <div className="card " style={{ width: 220, borderRadius: 8 }}>
             <div className="card-header">Jump to</div>
@@ -89,7 +97,9 @@ class Types extends Component {
 
 const mapStateToProps = state => ({
   items: state.category.items,
-  filterItems: state.category.filterItems
+  filterItems: state.category.filterItems,
+  typeItems: state.category.typeItems,
+  typeid: state.category.typeid
 });
 
 const mapDispatchToProps = dispatch => ({

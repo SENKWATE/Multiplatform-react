@@ -13,7 +13,7 @@ class ItemDetail extends Component {
 
     this.state = {
       time: 5,
-      bidding: true
+      bidding: false
     };
   }
 
@@ -175,15 +175,27 @@ class ItemDetail extends Component {
 
   render() {
     const item = this.props.itemDetail;
-    let amount;
+    let amount = item.starting_price;
     let name;
-    if (item.biddings) {
-      amount = item.biddings.map(a => a.amount);
-      name = item.biddings.map(a => a.user.username);
+    let price = item.starting_price;
+    let bidder;
+    let x = parseInt(item.starting_price, 10);
+
+    if (item.biddings && item.biddings.length) {
+      bidder = item.biddings.map(
+        a => (parseInt(price, 10) < parseInt(a.amount, 10) ? a : bidder)
+      );
+      console.log("BIDDER:", bidder);
+      amount = bidder.map(
+        a =>
+          x < a.amount ? ((x = a.amount), (name = a.user.username)) : (x = x)
+      );
+      //name = bidder.map(a => a.user.username);
     }
-    // let s = name.length;
-    console.log("username:", name);
-    console.log("amount", amount);
+
+    console.log("X:", x);
+    console.log("Name:", name);
+
     return (
       <div className="card mb-3">
         <h5
@@ -199,7 +211,15 @@ class ItemDetail extends Component {
           alt="Card image cap"
         />
         <div className="card-body">
-          <h1 className="text-center">Bidding price: {amount} K.D</h1>
+          <h1 className="text-center">
+            {item.biddings && item.biddings.length ? (
+              <h3>
+                Bidding price: {x} K.D by {name}
+              </h3>
+            ) : (
+              <h3>Initial Price: {item.starting_price}</h3>
+            )}
+          </h1>
 
           <p className="card-text text-center" style={{ fontSize: 30 }}>
             <small className="text-muted">
@@ -221,12 +241,12 @@ class ItemDetail extends Component {
           </p>
         </div>
         {this.props.user ? (
-          <BiddingForm item={item} amount={amount} />
+          <BiddingForm item={item} amount={x} />
         ) : (
           <small className="text-center">
-            <Link to="/login" style={{ color: "red" }}>
+            <Link to="/login" style={{ color: "red", fontSize: 18 }}>
               {" "}
-              Sign or sign up to bid on this item
+              Signin or sign up to start bidding on this item
             </Link>
           </small>
         )}

@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
+
 // Actions
+import * as actionCreators from "../store/actions/category";
 
 class BiddingForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      number: 0
+      amount: 0,
+      user: { username: this.props.user.username }
     };
     this.onTextChange = this.onTextChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -19,18 +22,13 @@ class BiddingForm extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    alert("button is pressed");
 
-    //this.setState({ message: "" });
-    // this.props.postBook(this.state, this.props.authorID);
+    this.props.postBiddings(this.props.item.id, this.state);
+    this.setState({ amount: "" });
   }
 
   render() {
-    let amount = 0;
-    if (this.props.item.biddings) {
-      amount = this.props.item.biddings.map(a => a.amount);
-      amount = parseInt(amount, 10) + 1;
-    }
+    let amount = parseInt(this.props.amount, 10) + 1;
 
     return (
       <div className="col-6 mx-auto p-0 mt-5">
@@ -38,6 +36,7 @@ class BiddingForm extends Component {
           <input
             style={{ width: 550 }}
             type="number"
+            name="amount"
             placeholder="add bid"
             min={amount}
             onChange={this.onTextChange}
@@ -58,14 +57,13 @@ class BiddingForm extends Component {
 const mapStateToProps = state => {
   return {
     user: state.auth.user
-    // channel: state.auth.channel
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    // postMessage: (id, newChannel) =>
-    //   dispatch(actionCreators.postMessage(id, newChannel))
+    postBiddings: (id, newBidding) =>
+      dispatch(actionCreators.postBiddings(id, newBidding))
   };
 };
 

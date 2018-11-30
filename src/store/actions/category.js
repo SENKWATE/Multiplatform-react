@@ -29,10 +29,23 @@ export const fetchItemDetail = itemID => {
       .get(`items/${itemID}/`)
       .then(res => res.data)
       .then(item => {
-        // console.log("CHANNEL");
-        // console.log(item);
         dispatch({
           type: actionTypes.FETCH_ITEM_DETAIL,
+          payload: item
+        });
+      })
+      .catch(err => console.error(err));
+  };
+};
+
+export const postBiddings = (itemID, userBidder) => {
+  return dispatch => {
+    instance
+      .post(`items/${itemID}/bid/`, userBidder)
+      .then(res => res.data)
+      .then(item => {
+        dispatch({
+          type: actionTypes.POST_BIDDINGS,
           payload: item
         });
       })
