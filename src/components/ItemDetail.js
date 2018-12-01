@@ -13,7 +13,8 @@ class ItemDetail extends Component {
 
     this.state = {
       time: 5,
-      bidding: false
+      bidding: true,
+      z: 0
     };
   }
 
@@ -78,21 +79,21 @@ class ItemDetail extends Component {
       let min_difference = 60 - current_min;
       let sec_difference = 60 - current_sec;
 
-      if (year_difference < 0) {
-        year_difference = year_difference * -1;
-      }
-      if (month_difference < 0) {
-        month_difference = month_difference * -1;
-      }
-      if (day_difference < 0) {
-        day_difference = day_difference * -1;
-      }
-      if (hour_difference < 0) {
-        hour_difference = hour_difference * -1;
-      }
-      if (min_difference < 0) {
-        min_difference = min_difference * -1;
-      }
+      // if (year_difference < 0) {
+      //   year_difference = year_difference * -1;
+      // }
+      // if (month_difference < 0) {
+      //   month_difference = month_difference * -1;
+      // }
+      // if (day_difference < 0) {
+      //   day_difference = day_difference * -1;
+      // }
+      // if (hour_difference < 0) {
+      //   hour_difference = hour_difference * -1;
+      // }
+      // if (min_difference < 0) {
+      //   min_difference = min_difference * -1;
+      // }
 
       if (year_difference > 0) {
         return (
@@ -156,6 +157,10 @@ class ItemDetail extends Component {
                       if (min - current_min === 1) {
                         return sec_difference + "sec";
                       } else {
+                        if (this.state.z === 0) {
+                          this.setState({ bidding: false });
+                        }
+                        this.state.z = this.state.z + 1;
                         return "The bidding is finished";
                       }
                     }
@@ -237,7 +242,9 @@ class ItemDetail extends Component {
           </p>
         </div>
         {this.props.user ? (
-          <BiddingForm item={item} amount={x} />
+          this.state.bidding ? (
+            <BiddingForm item={item} amount={x} />
+          ) : null
         ) : (
           <small className="text-center">
             <Link to="/login" style={{ color: "red", fontSize: 18 }}>
