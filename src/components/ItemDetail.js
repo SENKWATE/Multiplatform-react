@@ -188,8 +188,7 @@ class ItemDetail extends Component {
       );
       console.log("BIDDER:", bidder);
       amount = bidder.map(
-        a =>
-          x < a.amount ? ((x = a.amount), (name = a.user.username)) : (x = x)
+        a => (x < a.amount ? ((x = a.amount), (name = a.user)) : (x = x))
       );
       //name = bidder.map(a => a.user.username);
     }
@@ -215,7 +214,7 @@ class ItemDetail extends Component {
           <h1 className="text-center">
             {item.biddings && item.biddings.length ? (
               <h3>
-                Bidding price: {x} K.D by {name}
+                Bidding price: {item.highest_bid} K.D by {name}
               </h3>
             ) : (
               <h3>Initial Price: {item.starting_price}</h3>

@@ -10,7 +10,7 @@ class BiddingForm extends Component {
     super(props);
     this.state = {
       amount: 0,
-      user: { username: this.props.user.username }
+      user: this.props.user.username
     };
     this.onTextChange = this.onTextChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
