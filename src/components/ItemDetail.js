@@ -56,7 +56,7 @@ class ItemDetail extends Component {
     }
   }
 
-  getRemainingTime(dateTime) {
+  getRemainingTime(dateTime, name) {
     let date = new Date();
     let current_year = date.getFullYear(),
       current_month = date.getMonth() + 1,
@@ -161,7 +161,7 @@ class ItemDetail extends Component {
                           this.setState({ bidding: false });
                         }
                         this.state.z = this.state.z + 1;
-                        return "The bidding is finished";
+                        return name + " won the auction.";
                       }
                     }
                   }
@@ -232,7 +232,8 @@ class ItemDetail extends Component {
             </div>
             <div>
               <small className="text-muted">
-                Remaining time left: {this.getRemainingTime(item.end_date)}
+                Remaining time left:{" "}
+                {this.getRemainingTime(item.end_date, name)}
               </small>
             </div>
           </p>

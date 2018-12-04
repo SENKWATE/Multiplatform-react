@@ -11,6 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import * as actionCreators from "../../store/actions/authentication";
+import * as actionProfile from "../../store/actions/profile";
+
 import Popup from "../Popup";
 
 class AuthButton extends Component {
@@ -28,7 +30,7 @@ class AuthButton extends Component {
   render() {
     const user = this.props.user;
     let buttons, buttons2;
-    console.log(this.props.user);
+    console.log(this.state.showPopup);
 
     if (user) {
       buttons = (
@@ -95,8 +97,8 @@ class AuthButton extends Component {
     return (
       <ul className="navbar-nav ml-auto">
         {/* <span className="navbar-text">{user.username}</span> */}
-        {buttons2}
         {/*buttons*/}
+        {buttons2}
         {this.state.showPopup ? (
           <Popup closePopup={this.togglePopup.bind(this)} />
         ) : null}
@@ -109,7 +111,8 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(actionCreators.logout())
+  logout: () => dispatch(actionCreators.logout()),
+  getProfile: userID => dispatch(actionProfile.fetchProfileDetail(userID))
 });
 
 export default connect(

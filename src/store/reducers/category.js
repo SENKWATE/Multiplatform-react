@@ -33,6 +33,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         bidders: state.bidders.concat(action.payload)
       };
+
     case actionTypes.FILTER_ITEMS:
       // let type = state.items.filter(obj => obj.id.toString() === action.id);
       // console.log("TYPEDUS:", type);

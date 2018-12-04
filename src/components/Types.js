@@ -7,6 +7,14 @@ import * as actionCreators from "../store/actions/category";
 import ItemCard from "./ItemCard";
 import SearchBar from "./SearchBar";
 class Types extends Component {
+  componentDidMount() {
+    this.interval = setInterval(() => this.props.fetchItems(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   render() {
     const typeID = this.props.match.params.type;
 
@@ -40,7 +48,7 @@ class Types extends Component {
       content.item_types.map(container => (
         <div
           className="container ::-webkit-scrollbar ::-webkit-scrollbar-track ::-webkit-scrollbar-thumb ::-webkit-scrollbar-thumb:hover"
-          style={{ height: 500, overflow: "auto", marginTop: 40 }}
+          style={{ height: 550, overflow: "auto", marginTop: 40 }}
         >
           <h1 className="text-center typeshape" id={container.name}>
             <strong>{container.name}</strong>

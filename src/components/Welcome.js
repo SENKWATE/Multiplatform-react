@@ -1,13 +1,21 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import * as actionCreators from "../store/actions/authentication";
+import * as actionCreators from "../store/actions/category";
 import Types from "./Types";
 import Popup from "./Popup";
 import ItemCard from "./ItemCard";
 import SearchBar from "./SearchBar";
 
 class Welcome extends Component {
+  componentDidMount() {
+    this.interval = setInterval(() => this.props.fetchItems(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   render() {
     let category = this.props.category.map(
       type => (
@@ -115,6 +123,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   // checkToken: () => dispatch(actionCreators.checkForExpiredToken())
+  fetchItems: () => dispatch(actionCreators.fetchItems())
 });
 
 export default connect(

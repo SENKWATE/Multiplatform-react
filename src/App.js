@@ -16,10 +16,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 class App extends Component {
-  componentDidMount() {
-    this.props.fetchItems();
-  }
-
   render() {
     return (
       <div className="content-wrapper">

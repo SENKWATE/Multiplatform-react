@@ -14,23 +14,74 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 // Components
-// import ChannelNavLink from "./ChannelNavLink";
 
 class SideNav extends React.Component {
   constructor(props) {
     super(props);
     this.state = { collapsed: false };
   }
+  sortItemsById(biddingsHistory) {
+    biddingsHistory.sort((a, b) => {
+      return a.item.id - b.item.id;
+    });
+  }
 
-  // componentDidMount() {
-  //   this.props.fetchChannels();
-  // }
+  takeTheLastBid(myBiddings, biddingsHistory) {
+    let count = 0;
+    for (let i in biddingsHistory) {
+      if (myBiddings.length === 0) {
+        myBiddings.push(biddingsHistory[i]);
+      } else {
+        for (let j in myBiddings) {
+          if (
+            biddingsHistory[i].item.id === myBiddings[j].item.id &&
+            biddingsHistory[i].item.highest_bid > myBiddings[j].item.highest_bid
+          ) {
+            myBiddings[j] = biddingsHistory[i];
+          } else {
+            for (let z in myBiddings) {
+              if (biddingsHistory[i].item.id === myBiddings[z].item.id) {
+                count = count + 1;
+              }
+            }
+            if (count === 0) {
+              myBiddings.push(biddingsHistory[i]);
+            } else {
+              for (let w in myBiddings) {
+                if (biddingsHistory[i].item.id === myBiddings[w].item.id) {
+                  myBiddings[w] = biddingsHistory[i];
+                }
+              }
+            }
+            count = 0;
+          }
+        }
+      }
+    }
+  }
 
   render() {
-    // const channelLinks = this.props.channels.map(channel => (
-    //   <ChannelNavLink key={channel.name} channel={channel} />
-    // ));
+    let biddingsHistory = this.props.profile.biddings;
+    let myBiddings = [];
+    if (biddingsHistory && biddingsHistory.length) {
+      biddingsHistory.sort((a, b) => {
+        return a.item.id - b.item.id;
+      });
+      this.takeTheLastBid(myBiddings, biddingsHistory);
+    }
 
+    console.log("MYBiddings: ", myBiddings);
+
+    let rows = myBiddings.map(
+      row => (
+        console.log(row),
+        (
+          <li className="list-group-item">
+            <Link to={`/items/${row.item.id}/`}>{row.item.name}</Link>
+          </li>
+        )
+      )
+    );
     return (
       <div>
         {this.props.user ? (
@@ -57,11 +108,7 @@ class SideNav extends React.Component {
               </li>
 
               <div className="card" style={{ marginLeft: 5, width: 220 }}>
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item">iPhoneX {`<TIME>`} </li>
-                  <li className="list-group-item">MAC {`<TIME>`} </li>
-                  <li className="list-group-item">MSI PC {`<TIME>`} </li>
-                </ul>
+                <ul className="list-group list-group-flush">{rows}</ul>
               </div>
 
               {/*this.props.channel*/}
@@ -91,7 +138,8 @@ class SideNav extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  user: state.auth.user
+  user: state.auth.user,
+  profile: state.profile.profile
 });
 
 const mapDispatchToProps = dispatch => {

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actionCreators from "../store/actions/profile";
-
+import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Components
 import Loading from "./Loading";
 
@@ -11,7 +12,7 @@ class Popup extends React.Component {
     this.props.getProfile(this.props.user.user_id);
   }
   render() {
-    //     console.log("USER", this.props.profile);
+    //     console.log("USER", this.propss.profile);
     // console.log("PROFILE", this.props.profile.profile.bio);
     if (this.props.loading) {
       return <Loading />;
@@ -45,10 +46,14 @@ class Popup extends React.Component {
               {this.props.profile.profile.bio ? bio : null}
               {this.props.profile.profile.location ? location : null}
               {this.props.profile.profile.birth_date ? birth_date : null}
+              <span className="nav-link-text mr-2 col-md-2 col-md-offset-3">
+                <FontAwesomeIcon
+                  icon={faWindowClose}
+                  onClick={this.props.closePopup}
+                  style={{ fontSize: 40, color: "red" }}
+                />
+              </span>
             </div>
-            <button style={{ marginLeft: 300 }} onClick={this.props.closePopup}>
-              close me
-            </button>
           </div>
         </div>
       );

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
+import * as actionCreators from "../store/actions/profile";
+import { connect } from "react-redux";
 
 class ItemCard extends Component {
   constructor(props) {
@@ -151,19 +153,17 @@ class ItemCard extends Component {
             />
           </div>
           <div className="card-body">
-            <h5 className="card-title text-center" style={{ color: "white" }}>
+            <h4 className="card-title text-center" style={{ color: "white" }}>
               <span>{item.name}</span>
-              {
-                <p style={{ fontSize: 15 }}>
-                  {" "}
-                  Time remaining: {this.getRemainingTime(item.end_date)}
-                </p>
-              }
-              <div style={{ fontSize: 15 }}>
-                {" "}
-                End Date: {this.getDate(item.end_date)}
+              <div style={{ fontSize: 16 }}>
+                Top bidding: {item.highest_bid} K.D
               </div>
-            </h5>
+              <p style={{ fontSize: 15 }}>
+                {" "}
+                Time remaining: {this.getRemainingTime(item.end_date)}{" "}
+                <div>End Date: {this.getDate(item.end_date)}</div>
+              </p>
+            </h4>
           </div>
         </Link>
       </div>
@@ -171,4 +171,21 @@ class ItemCard extends Component {
   }
 }
 
-export default withRouter(ItemCard);
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getProfile: userID => dispatch(actionCreators.fetchProfileDetail(userID))
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ItemCard)
+);
