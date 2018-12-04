@@ -90,7 +90,7 @@ class SideNav extends React.Component {
               className="navbar-nav navbar-sidenav"
               id="exampleAccordion"
               style={{
-                backgroundColor: "#6663BD"
+                backgroundColor: "#545454"
               }}
             >
               <li
@@ -118,7 +118,7 @@ class SideNav extends React.Component {
                 <span
                   className="nav-link text-center"
                   id="sidenavToggler"
-                  style={{ backgroundColor: "#3E39C3" }}
+                  style={{ backgroundColor: "#393939" }}
                   onClick={() =>
                     this.setState(prevState => ({
                       collapsed: !prevState.collapsed

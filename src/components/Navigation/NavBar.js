@@ -34,7 +34,7 @@ class NavBar extends Component {
       <nav
         className="navbar navbar-expand-lg navbar-dark fixed-top"
         id="mainNav"
-        style={{ height: 60, backgroundColor: "#39359B" }}
+        style={{ height: 60, backgroundColor: "#393939" }}
       >
         <Link
           className="navbar-brand"

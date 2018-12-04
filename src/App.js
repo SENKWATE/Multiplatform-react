@@ -18,7 +18,7 @@ import store from "./store";
 class App extends Component {
   render() {
     return (
-      <div className="content-wrapper">
+      <div className="content-wrapper" style={{ backgroundColor: "#1E1E1E" }}>
         <NavBar />
         <Switch>
           <Route path="/items/:itemID" component={ItemDetail} />

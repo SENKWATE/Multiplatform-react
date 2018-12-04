@@ -22,7 +22,6 @@ class BiddingForm extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-
     this.props.postBiddings(this.props.item.id, this.state);
     this.setState({ amount: "" });
   }

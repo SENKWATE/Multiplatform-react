@@ -11,19 +11,27 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #6e86fd;
+  background: #ac6efd;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #ac6efd;
+  background: #56de9a;
 }
 
+.itemdetail {
+  font-family: "Fjalla One", sans-serif;
+}
 .typeshape {
   font-family: "Audiowide", cursive;
   font-family: "Federant", cursive;
   font-family: "Gentium Basic", serif;
+}
+
+.catback {
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .typeTitle {

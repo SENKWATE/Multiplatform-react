@@ -68,7 +68,7 @@ class AuthButton extends Component {
             >
               View Profile
             </Link>
-            <div class="dropdown-divider" />
+            <div className="dropdown-divider" />
             <Link
               to="/welcome"
               className="dropdown-item"

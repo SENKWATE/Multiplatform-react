@@ -87,10 +87,111 @@ class Welcome extends Component {
     //   ))
     // );
 
-    // console.log("category:");
-    // console.log(category);
-    // console.log("types:");
-    // console.log(types);
+    let categories = this.props.category.map(
+      cat => (
+        console.log(cat.logo),
+        (
+          <div>
+            <div
+              className="jumbotron catback"
+              style={{
+                height: 400,
+                backgroundImage: `url(${cat.logo})`,
+                width: 900
+              }}
+            />
+            <div className="jumbotron catback" />
+          </div>
+        )
+      )
+    );
+
+    let images = this.props.category.map(cat => (
+      <div className="carousel-item">
+        <img
+          className="d-block w-100"
+          src={cat.logo}
+          alt={cat.name}
+          style={{ height: 500 }}
+        />
+      </div>
+    ));
+
+    let n = 0;
+    let slides = this.props.category.map(
+      slide => (
+        (n = n + 1),
+        <li data-target="#carouselExampleIndicators" data-slide-to={`${n}`} />
+      )
+    );
+    n = 0;
+    let cats = this.props.category.map(cat => (
+      <div
+        id="carouselExampleIndicators"
+        class="carousel slide"
+        data-ride="carousel"
+        style={{ width: 900, height: 500, marginLeft: 100, marginTop: 50 }}
+      >
+        <ol className="carousel-indicators">
+          <li
+            data-target="#carouselExampleIndicators"
+            data-slide-to="0"
+            className="active"
+          />
+
+          {cat.item_types.map(
+            type => (
+              (n = n + 1),
+              console.log(n),
+              (
+                <li
+                  data-target="#carouselExampleIndicators"
+                  data-slide-to={`${n}`}
+                />
+              )
+            )
+          )}
+        </ol>
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <img
+              className="d-block w-100"
+              src="https://www.alghad.com/file.php?fileid=267733&width=658&height=400"
+              alt="First slide"
+              style={{ height: 500 }}
+            />
+          </div>
+          {cat.item_types.map(type => (
+            <div className="carousel-item">
+              <img
+                className="d-block w-100"
+                src={type.logo}
+                alt={type.name}
+                style={{ height: 500 }}
+              />
+            </div>
+          ))}
+        </div>
+        <a
+          className="carousel-control-prev"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="prev"
+        >
+          <span className="carousel-control-prev-icon" aria-hidden="true" />
+          <span className="sr-only">Previous</span>
+        </a>
+        <a
+          className="carousel-control-next"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="next"
+        >
+          <span className="carousel-control-next-icon" aria-hidden="true" />
+          <span className="sr-only">Next</span>
+        </a>
+      </div>
+    ));
 
     return (
       <div className="" style={{ marginTop: 100 }}>
@@ -106,10 +207,97 @@ class Welcome extends Component {
           <div className="card-header">Categories</div>
           <ul className="list-group list-group-flush">{category}</ul>
         </div>*/}
-          <div className="jumbotron">
+
+          {/*<div className="jumbotron">
             <div className="row">{itemcards}</div>
+          </div>*/}
+
+          <div
+            id="carouselExampleIndicators"
+            class="carousel slide"
+            data-ride="carousel"
+            style={{ width: 900, height: 500, marginLeft: 100 }}
+          >
+            <ol className="carousel-indicators">
+              <li
+                data-target="#carouselExampleIndicators"
+                data-slide-to="0"
+                className="active"
+              />
+
+              {slides}
+            </ol>
+            <div className="carousel-inner">
+              <div className="carousel-item active">
+                <img
+                  className="d-block w-100"
+                  src="https://www.alghad.com/file.php?fileid=267733&width=658&height=400"
+                  alt="First slide"
+                  style={{ height: 500 }}
+                />
+              </div>
+              {images}
+            </div>
+            <a
+              className="carousel-control-prev"
+              href="#carouselExampleIndicators"
+              role="button"
+              data-slide="prev"
+            >
+              <span className="carousel-control-prev-icon" aria-hidden="true" />
+              <span className="sr-only">Previous</span>
+            </a>
+            <a
+              className="carousel-control-next"
+              href="#carouselExampleIndicators"
+              role="button"
+              data-slide="next"
+            >
+              <span className="carousel-control-next-icon" aria-hidden="true" />
+              <span className="sr-only">Next</span>
+            </a>
           </div>
         </div>
+
+        <div
+          id="carouselExampleControls"
+          className="carousel slide"
+          data-ride="carousel"
+        >
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <img
+                className="d-block w-100"
+                src="http://development.com/wp-content/uploads/2018/05/development.jpg"
+                alt="First slide"
+                style={{ height: 500 }}
+              />
+            </div>
+            {images}
+          </div>
+
+          <a
+            className="carousel-control-prev"
+            href="#carouselExampleControls"
+            role="button"
+            data-slide="prev"
+          >
+            <span className="carousel-control-prev-icon" aria-hidden="true" />
+            <span className="sr-only">Previous</span>
+          </a>
+          <a
+            className="carousel-control-next"
+            href="#carouselExampleControls"
+            role="button"
+            data-slide="next"
+          >
+            <span className="carousel-control-next-icon" aria-hidden="true" />
+            <span className="sr-only">Next</span>
+          </a>
+        </div>
+
+        {/*  <div style={{ marginTop: 100 }}>{categories}</div> */}
+        {cats}
       </div>
     );
   }

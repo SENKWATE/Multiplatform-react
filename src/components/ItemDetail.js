@@ -79,6 +79,9 @@ class ItemDetail extends Component {
       let min_difference = 60 - current_min;
       let sec_difference = 60 - current_sec;
 
+      console.log("YEAR: ", year_difference);
+      console.log("MONTH: ", month_difference);
+      console.log("DAY: ", day_difference);
       // if (year_difference < 0) {
       //   year_difference = year_difference * -1;
       // }
@@ -127,7 +130,7 @@ class ItemDetail extends Component {
               if (day_difference === 1) {
                 return hour_difference + "h ,and " + min_difference + "min.";
               } else {
-                if (hour - current_hour > 1) {
+                if (hour - current_hour > 1 && day_difference === 0) {
                   return (
                     hour -
                     current_hour +
@@ -138,12 +141,12 @@ class ItemDetail extends Component {
                     "sec"
                   );
                 } else {
-                  if (hour - current_hour === 1) {
+                  if (hour - current_hour === 1 && day_difference === 0) {
                     return (
                       min_difference + "min, and " + sec_difference + "sec"
                     );
                   } else {
-                    if (min - current_min > 1) {
+                    if (min - current_min > 1 && day_difference === 0) {
                       return (
                         min -
                         current_min -
@@ -154,7 +157,7 @@ class ItemDetail extends Component {
                       );
                     } else {
                       // show seconds only
-                      if (min - current_min === 1) {
+                      if (min - current_min === 1 && day_difference === 0) {
                         return sec_difference + "sec";
                       } else {
                         if (this.state.z === 0) {
@@ -193,53 +196,54 @@ class ItemDetail extends Component {
       //name = bidder.map(a => a.user.username);
     }
 
-    console.log("X:", x);
-    console.log("Name:", name);
+    // console.log("X:", x);
+    // console.log("Name:", name);
 
     return (
       <div className="card mb-3">
         <h5
-          className="card-title text-center"
+          className="card-title text-center itemdetail"
           style={{ marginTop: 100, fontSize: 50 }}
         >
           {item.name} {/*this.state.time*/}
         </h5>
         <img
-          style={{ width: 600, marginLeft: 350 }}
+          style={{ width: 700, marginLeft: 300, borderRadius: 10 }}
           className="card-img-top"
           src={item.logo}
           alt="Card image cap"
         />
-        <div className="card-body">
+        <div className="card-body itemdetail">
           <h1 className="text-center">
             {item.biddings && item.biddings.length ? (
-              <h3>
+              <p>
                 Bidding price: {item.highest_bid} K.D by {name}
-              </h3>
+              </p>
             ) : (
-              <h3>Initial Price: {item.starting_price}</h3>
+              <p>Initial Price: {item.starting_price} K.D</p>
             )}
           </h1>
 
-          <p className="card-text text-center" style={{ fontSize: 30 }}>
+          <div className="card-text text-center" style={{ fontSize: 30 }}>
             <small className="text-muted">
               End date: {this.getDate(item.end_date)}
             </small>
-            <div>
-              <small className="text-muted">
+            <div className="text-muted">
+              <small>
                 End time in Kuwait City (in 24h): {this.getTime(item.end_date)}
               </small>
             </div>
-            <div>
-              <small className="text-muted">
+            <div className="text-muted">
+              <small>
                 Remaining time left:{" "}
                 {this.getRemainingTime(item.end_date, name)}
               </small>
             </div>
-          </p>
-          <p className="card-text text-center">
-            <h3>Description:</h3> <div>{item.description}</div>
-          </p>
+          </div>
+          <div className="card-text text-center">
+            <h3>Description:</h3>{" "}
+            <div style={{ fontSize: 20 }}>{item.description}</div>
+          </div>
         </div>
         {this.props.user ? (
           this.state.bidding ? (

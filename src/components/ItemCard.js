@@ -82,7 +82,7 @@ class ItemCard extends Component {
               if (day_difference === 1) {
                 return hour_difference + "h ,and " + min_difference + "min.";
               } else {
-                if (hour - current_hour > 1) {
+                if (hour - current_hour > 1 && day_difference === 0) {
                   return (
                     hour -
                     current_hour +
@@ -93,12 +93,12 @@ class ItemCard extends Component {
                     "sec"
                   );
                 } else {
-                  if (hour - current_hour === 1) {
+                  if (hour - current_hour === 1 && day_difference === 0) {
                     return (
                       min_difference + "min, and " + sec_difference + "sec"
                     );
                   } else {
-                    if (min - current_min > 1) {
+                    if (min - current_min > 1 && day_difference === 0) {
                       return (
                         min -
                         current_min -
@@ -109,14 +109,14 @@ class ItemCard extends Component {
                       );
                     } else {
                       // show seconds only
-                      if (min - current_min === 1) {
+                      if (min - current_min === 1 && day_difference === 0) {
                         return sec_difference + "sec";
                       } else {
                         if (this.state.z === 0) {
                           this.setState({ bidding: false });
                         }
                         this.state.z = this.state.z + 1;
-                        return "The bidding is finished";
+                        return "The bid is finished";
                       }
                     }
                   }
@@ -156,13 +156,17 @@ class ItemCard extends Component {
             <h4 className="card-title text-center" style={{ color: "white" }}>
               <span>{item.name}</span>
               <div style={{ fontSize: 16 }}>
-                Top bidding: {item.highest_bid} K.D
+                {item.biddings && item.biddings.length ? (
+                  <div>Bidding price: {item.highest_bid} K.D by</div>
+                ) : (
+                  <div>Initial Price: {item.starting_price} K.D</div>
+                )}
               </div>
-              <p style={{ fontSize: 15 }}>
+              <div style={{ fontSize: 15 }}>
                 {" "}
                 Time remaining: {this.getRemainingTime(item.end_date)}{" "}
                 <div>End Date: {this.getDate(item.end_date)}</div>
-              </p>
+              </div>
             </h4>
           </div>
         </Link>

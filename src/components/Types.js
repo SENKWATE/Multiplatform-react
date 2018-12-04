@@ -51,11 +51,11 @@ class Types extends Component {
           style={{ height: 550, overflow: "auto", marginTop: 40 }}
         >
           <h1 className="text-center typeshape" id={container.name}>
-            <strong>{container.name}</strong>
+            <strong style={{ color: "white" }}>{container.name}</strong>
           </h1>
           <div
             className="jumbotron"
-            style={{ height: 400, backgroundColor: "#D9D8F9" }}
+            style={{ height: 450, backgroundColor: "#9DA4A0" }}
           >
             <div className="row">
               {container.items.map(item => (
@@ -85,7 +85,7 @@ class Types extends Component {
       <div>
         <h1
           className="text-center typeTitle"
-          style={{ marginTop: 50, fontSize: 60 }}
+          style={{ marginTop: 50, fontSize: 60, color: "white" }}
         >
           {name}
         </h1>
