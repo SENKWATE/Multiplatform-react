@@ -6,6 +6,7 @@ import * as actionCreators from "../store/actions/category";
 // Components
 import ItemCard from "./ItemCard";
 import SearchBar from "./SearchBar";
+
 class Types extends Component {
   componentDidMount() {
     this.interval = setInterval(() => this.props.fetchItems(), 1000);
@@ -48,15 +49,12 @@ class Types extends Component {
       content.item_types.map(container => (
         <div
           className="container ::-webkit-scrollbar ::-webkit-scrollbar-track ::-webkit-scrollbar-thumb ::-webkit-scrollbar-thumb:hover"
-          style={{ height: 550, overflow: "auto", marginTop: 40 }}
+          style={{ height: 590, overflow: "auto", marginTop: 40 }}
         >
           <h1 className="text-center typeshape" id={container.name}>
             <strong style={{ color: "white" }}>{container.name}</strong>
           </h1>
-          <div
-            className="jumbotron"
-            style={{ height: 450, backgroundColor: "#9DA4A0" }}
-          >
+          <div className="jumbotron" style={{ backgroundColor: "#9DA4A0" }}>
             <div className="row">
               {container.items.map(item => (
                 <ItemCard key={item.name} item={item} />
@@ -89,11 +87,24 @@ class Types extends Component {
         >
           {name}
         </h1>
-        <SearchBar id={this.props.match.params.type} />
+        {/*<SearchBar id={this.props.match.params.type} />*/}
         <div className="container text-center col-md-2 col-md-offset-3">
-          <div className="card " style={{ width: 220, borderRadius: 8 }}>
-            <div className="card-header">Jump to</div>
-            <ul className="list-group list-group-flush">{links}</ul>
+          <div
+            className="card itemdetail"
+            style={{ width: 220, borderRadius: 8 }}
+          >
+            <div
+              className="card-header"
+              style={{ backgroundColor: "#BEC0BF", fontSize: 23 }}
+            >
+              Jump to
+            </div>
+            <ul
+              className="list-group list-group-flush"
+              style={{ backgroundColor: "#EBEBEB" }}
+            >
+              {links}
+            </ul>
           </div>
         </div>
 

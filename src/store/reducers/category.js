@@ -5,7 +5,8 @@ const initialState = {
   categoryNames: [],
   item: [],
   filterItems: [],
-  bidders: []
+  bidders: [],
+  loading: true
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,14 +27,19 @@ const reducer = (state = initialState, action) => {
     case actionTypes.FETCH_ITEM_DETAIL:
       return {
         ...state,
-        item: action.payload
+        item: action.payload,
+        loading: false
       };
     case actionTypes.POST_BIDDINGS:
       return {
         ...state,
         bidders: state.bidders.concat(action.payload)
       };
-
+    case actionTypes.SET_ITEM_LOADING:
+      return {
+        ...state,
+        loading: true
+      };
     case actionTypes.FILTER_ITEMS:
       // let type = state.items.filter(obj => obj.id.toString() === action.id);
       // console.log("TYPEDUS:", type);

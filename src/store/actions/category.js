@@ -8,6 +8,10 @@ const instance = axios.create({
   baseURL: "http://104.248.37.122/api/"
 });
 
+export const setItemLoading = () => ({
+  type: actionTypes.SET_ITEM_LOADING
+});
+
 export const fetchItems = () => {
   return dispatch => {
     //This function gets called by Redux Thunk
@@ -25,6 +29,7 @@ export const fetchItems = () => {
 
 export const fetchItemDetail = itemID => {
   return dispatch => {
+    // dispatch(setItemLoading());
     instance
       .get(`items/${itemID}/`)
       .then(res => res.data)

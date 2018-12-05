@@ -84,20 +84,16 @@ class SideNav extends React.Component {
     );
     return (
       <div>
-        {this.props.user ? (
-          <div>
-            <ul
-              className="navbar-nav navbar-sidenav"
-              id="exampleAccordion"
-              style={{
-                backgroundColor: "#545454"
-              }}
-            >
-              <li
-                className="nav-item"
-                data-toggle="tooltip"
-                data-placement="right"
-              >
+        <ul
+          className="navbar-nav navbar-sidenav"
+          id="exampleAccordion"
+          style={{
+            backgroundColor: "#545454"
+          }}
+        >
+          <li className="nav-item" data-toggle="tooltip" data-placement="right">
+            {this.props.user ? (
+              <div>
                 <div
                   className="nav-link heading text-center"
                   style={{ color: "white" }}
@@ -105,34 +101,33 @@ class SideNav extends React.Component {
                   <FontAwesomeIcon icon={faGavel} style={{ fontSize: 25 }} />
                   <span className="nav-link-text mr-2"> My Auctions</span>
                 </div>
-              </li>
-
-              <div className="card" style={{ marginLeft: 5, width: 220 }}>
-                <ul className="list-group list-group-flush">{rows}</ul>
+                <div className="card" style={{ marginLeft: 5, width: 220 }}>
+                  <ul className="list-group list-group-flush">{rows}</ul>
+                </div>
               </div>
+            ) : null}
+          </li>
 
-              {/*this.props.channel*/}
-            </ul>
-            <ul className="navbar-nav sidenav-toggler">
-              <li className="nav-item">
-                <span
-                  className="nav-link text-center"
-                  id="sidenavToggler"
-                  style={{ backgroundColor: "#393939" }}
-                  onClick={() =>
-                    this.setState(prevState => ({
-                      collapsed: !prevState.collapsed
-                    }))
-                  }
-                >
-                  <FontAwesomeIcon
-                    icon={this.state.collapsed ? faAngleLeft : faAngleRight}
-                  />
-                </span>
-              </li>
-            </ul>
-          </div>
-        ) : null}
+          {/*this.props.channel*/}
+        </ul>
+        <ul className="navbar-nav sidenav-toggler">
+          <li className="nav-item">
+            <span
+              className="nav-link text-center"
+              id="sidenavToggler"
+              style={{ backgroundColor: "#393939" }}
+              onClick={() =>
+                this.setState(prevState => ({
+                  collapsed: !prevState.collapsed
+                }))
+              }
+            >
+              <FontAwesomeIcon
+                icon={this.state.collapsed ? faAngleLeft : faAngleRight}
+              />
+            </span>
+          </li>
+        </ul>
       </div>
     );
   }

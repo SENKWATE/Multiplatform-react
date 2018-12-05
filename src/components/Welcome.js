@@ -107,7 +107,7 @@ class Welcome extends Component {
     );
 
     let images = this.props.category.map(cat => (
-      <div className="carousel-item">
+      <div className="carousel-item" key={cat.name}>
         <img
           className="d-block w-100"
           src={cat.logo}
@@ -121,60 +121,44 @@ class Welcome extends Component {
     let slides = this.props.category.map(
       slide => (
         (n = n + 1),
-        <li data-target="#carouselExampleIndicators" data-slide-to={`${n}`} />
+        (
+          <li
+            data-target="#carouselExampleIndicators"
+            data-slide-to={`${n}`}
+            key={slide.name}
+          />
+        )
       )
     );
     n = 0;
     let cats = this.props.category.map(cat => (
       <div
-        id="carouselExampleIndicators"
-        class="carousel slide"
+        id="carouselExampleControls"
+        className="carousel slide"
         data-ride="carousel"
-        style={{ width: 900, height: 500, marginLeft: 100, marginTop: 50 }}
       >
-        <ol className="carousel-indicators">
-          <li
-            data-target="#carouselExampleIndicators"
-            data-slide-to="0"
-            className="active"
-          />
-
-          {cat.item_types.map(
-            type => (
-              (n = n + 1),
-              console.log(n),
-              (
-                <li
-                  data-target="#carouselExampleIndicators"
-                  data-slide-to={`${n}`}
-                />
-              )
-            )
-          )}
-        </ol>
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img
               className="d-block w-100"
-              src="https://www.alghad.com/file.php?fileid=267733&width=658&height=400"
+              src="http://development.com/wp-content/uploads/2018/05/development.jpg"
               alt="First slide"
               style={{ height: 500 }}
             />
           </div>
-          {cat.item_types.map(type => (
-            <div className="carousel-item">
-              <img
-                className="d-block w-100"
-                src={type.logo}
-                alt={type.name}
-                style={{ height: 500 }}
-              />
-            </div>
-          ))}
+          <div className="carousel-item">
+            <img
+              className="d-block w-100"
+              src="http://development.com/wp-content/uploads/2018/05/development.jpg"
+              alt="First slide"
+              style={{ height: 500 }}
+            />
+          </div>
         </div>
+
         <a
           className="carousel-control-prev"
-          href="#carouselExampleIndicators"
+          href="#carouselExampleControls"
           role="button"
           data-slide="prev"
         >
@@ -183,7 +167,7 @@ class Welcome extends Component {
         </a>
         <a
           className="carousel-control-next"
-          href="#carouselExampleIndicators"
+          href="#carouselExampleControls"
           role="button"
           data-slide="next"
         >
@@ -194,27 +178,15 @@ class Welcome extends Component {
     ));
 
     return (
-      <div className="" style={{ marginTop: 100 }}>
-        <SearchBar />
+      <div style={{ marginTop: 100 }}>
+        {/*<SearchBar />*/}
         <div
           className="container ::-webkit-scrollbar ::-webkit-scrollbar-track ::-webkit-scrollbar-thumb ::-webkit-scrollbar-thumb:hover"
           style={{ height: 600, overflow: "auto" }}
         >
-          {/*<div
-          className="card text-center"
-          style={{ width: 200, borderRadius: 25, marginLeft: 10 }}
-        >
-          <div className="card-header">Categories</div>
-          <ul className="list-group list-group-flush">{category}</ul>
-        </div>*/}
-
-          {/*<div className="jumbotron">
-            <div className="row">{itemcards}</div>
-          </div>*/}
-
           <div
             id="carouselExampleIndicators"
-            class="carousel slide"
+            className="carousel slide"
             data-ride="carousel"
             style={{ width: 900, height: 500, marginLeft: 100 }}
           >
@@ -258,9 +230,9 @@ class Welcome extends Component {
             </a>
           </div>
         </div>
-
+        /////////////////////////////////////////////////////////////////////////////////////
         <div
-          id="carouselExampleControls"
+          id="carouselExampleControls1"
           className="carousel slide"
           data-ride="carousel"
         >
@@ -278,7 +250,7 @@ class Welcome extends Component {
 
           <a
             className="carousel-control-prev"
-            href="#carouselExampleControls"
+            href="#carouselExampleControls1"
             role="button"
             data-slide="prev"
           >
@@ -287,7 +259,7 @@ class Welcome extends Component {
           </a>
           <a
             className="carousel-control-next"
-            href="#carouselExampleControls"
+            href="#carouselExampleControls1"
             role="button"
             data-slide="next"
           >
@@ -295,7 +267,7 @@ class Welcome extends Component {
             <span className="sr-only">Next</span>
           </a>
         </div>
-
+        ///////////////////////////////////////////////////////////////////////////////////
         {/*  <div style={{ marginTop: 100 }}>{categories}</div> */}
         {cats}
       </div>

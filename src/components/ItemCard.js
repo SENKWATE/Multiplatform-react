@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import * as actionCreators from "../store/actions/profile";
 import { connect } from "react-redux";
+import moment from "moment";
 
 class ItemCard extends Component {
   constructor(props) {
@@ -27,105 +28,22 @@ class ItemCard extends Component {
     clearInterval(this.interval);
   }
 
-  getRemainingTime(dateTime) {
-    let date = new Date();
-    let current_year = date.getFullYear(),
-      current_month = date.getMonth() + 1,
-      current_day = date.getDate(),
-      current_hour = date.getHours(),
-      current_min = date.getMinutes(),
-      current_sec = date.getSeconds();
+  getRemainingTime(dateTime, name) {
+    const deadline = moment(dateTime);
+    const today = moment(new Date());
+    const difference = deadline.diff(today);
 
-    if (dateTime) {
-      let year = parseInt(dateTime.slice(0, 4), 10);
-      let month = parseInt(dateTime.slice(5, 7), 10);
-      let day = parseInt(dateTime.slice(8, 10), 10);
-      let hour = parseInt(dateTime.slice(11, 13), 10);
-      let min = parseInt(dateTime.slice(14, 16), 10);
+    if (difference <= 0) return "Finished";
+    else {
+      const duration = moment.duration(difference);
+      const units = ["years", "months", "days", "hours", "minutes", "seconds"];
 
-      let year_difference = year - current_year;
-      let month_difference = month - current_month;
-      let day_difference = day - current_day;
-      let hour_difference = 23 - current_hour;
-      let min_difference = 60 - current_min;
-      let sec_difference = 60 - current_sec;
-
-      if (year_difference > 0) {
-        return (
-          year_difference +
-          " years, " +
-          month_difference +
-          " months, " +
-          "and " +
-          day_difference +
-          " days."
-        );
-      } else {
-        if (month_difference > 1) {
-          return (
-            month_difference + " months " + "and " + day_difference + " days."
-          );
-        } else {
-          if (month_difference === 1) {
-            return day_difference + " days.";
-          } else {
-            if (day_difference > 1) {
-              return (
-                day_difference +
-                " days, " +
-                hour_difference +
-                "h ,and " +
-                min_difference +
-                "min."
-              );
-            } else {
-              if (day_difference === 1) {
-                return hour_difference + "h ,and " + min_difference + "min.";
-              } else {
-                if (hour - current_hour > 1 && day_difference === 0) {
-                  return (
-                    hour -
-                    current_hour +
-                    "h," +
-                    min_difference +
-                    "min, and " +
-                    sec_difference +
-                    "sec"
-                  );
-                } else {
-                  if (hour - current_hour === 1 && day_difference === 0) {
-                    return (
-                      min_difference + "min, and " + sec_difference + "sec"
-                    );
-                  } else {
-                    if (min - current_min > 1 && day_difference === 0) {
-                      return (
-                        min -
-                        current_min -
-                        1 +
-                        "min and " +
-                        sec_difference +
-                        "sec"
-                      );
-                    } else {
-                      // show seconds only
-                      if (min - current_min === 1 && day_difference === 0) {
-                        return sec_difference + "sec";
-                      } else {
-                        if (this.state.z === 0) {
-                          this.setState({ bidding: false });
-                        }
-                        this.state.z = this.state.z + 1;
-                        return "The bid is finished";
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+      return units.reduce((timeRemaining, unit) => {
+        if (duration[unit]() > 0) {
+          return timeRemaining + `${duration[unit]()} ${unit} ${","}`;
         }
-      }
+        return timeRemaining;
+      }, "");
     }
   }
 
@@ -139,7 +57,7 @@ class ItemCard extends Component {
           className="card"
           style={{
             width: 340,
-            height: 340,
+            height: 360,
             marginRight: 10,
             backgroundColor: "black"
           }}
