@@ -14,8 +14,7 @@ class ItemDetail extends Component {
 
     this.state = {
       time: 5,
-      bidding: true,
-      z: 0
+      bidding: true
     };
   }
 
@@ -71,6 +70,7 @@ class ItemDetail extends Component {
         if (duration[unit]() > 0) {
           return timeRemaining + `${duration[unit]()} ${unit} ${","}`;
         }
+
         return timeRemaining;
       }, "");
     }
@@ -88,15 +88,19 @@ class ItemDetail extends Component {
       bidder = item.biddings.map(
         a => (parseInt(price, 10) < parseInt(a.amount, 10) ? a : bidder)
       );
-      console.log("BIDDER:", bidder);
+      // console.log("BIDDER:", bidder);
       amount = bidder.map(
-        a => (x < a.amount ? ((x = a.amount), (name = a.user)) : (x = x))
+        a =>
+          x < parseInt(a.amount, 10)
+            ? ((x = a.amount), (name = a.user))
+            : (x = x)
       );
       //name = bidder.map(a => a.user.username);
     }
+    // console.log(x);
+    let bidding = this.getRemainingTime(item.end_date) !== "Finished";
+    console.log(bidding);
 
-    // console.log("X:", x);
-    // console.log("Name:", name);
     if (this.props.loading) {
       return <Loading />;
     } else {
@@ -148,7 +152,7 @@ class ItemDetail extends Component {
             </div>
           </div>
           {this.props.user ? (
-            this.state.bidding ? (
+            bidding ? (
               <BiddingForm item={item} amount={x} />
             ) : null
           ) : (

@@ -17,24 +17,19 @@ class Welcome extends Component {
   }
 
   render() {
-    let category = this.props.category.map(
-      type => (
-        console.log(type),
-        (
-          <li className="list-group-item">
-            {" "}
-            <Link
-              className="dropdown-item"
-              to={`/types/${type.id}`}
-              key={type.name}
-              type={type}
-            >
-              {type.name}
-            </Link>
-          </li>
-        )
-      )
-    );
+    let category = this.props.category.map(type => (
+      <li className="list-group-item">
+        {" "}
+        <Link
+          className="dropdown-item"
+          to={`/types/${type.id}`}
+          key={type.name}
+          type={type}
+        >
+          {type.name}
+        </Link>
+      </li>
+    ));
 
     let items = this.props.category.map(category =>
       category.item_types.map(itemType =>
@@ -68,16 +63,12 @@ class Welcome extends Component {
     // );
 
     let itemcards = this.props.filterItems.map(item =>
-      item.map(a =>
-        a.map(
-          b => (console.log("card2", b), <ItemCard key={b.name} item={b} />)
-        )
-      )
+      item.map(a => a.map(b => <ItemCard key={b.name} item={b} />))
     );
 
-    console.log("items:");
-    console.log(items);
-    console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
+    // console.log("items:");
+    // console.log(items);
+    // console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
 
     // let types = this.props.category.map(name =>
     //   name.item_types.map(a => (
@@ -87,24 +78,19 @@ class Welcome extends Component {
     //   ))
     // );
 
-    let categories = this.props.category.map(
-      cat => (
-        console.log(cat.logo),
-        (
-          <div>
-            <div
-              className="jumbotron catback"
-              style={{
-                height: 400,
-                backgroundImage: `url(${cat.logo})`,
-                width: 900
-              }}
-            />
-            <div className="jumbotron catback" />
-          </div>
-        )
-      )
-    );
+    let categories = this.props.category.map(cat => (
+      <div>
+        <div
+          className="jumbotron catback"
+          style={{
+            height: 400,
+            backgroundImage: `url(${cat.logo})`,
+            width: 900
+          }}
+        />
+        <div className="jumbotron catback" />
+      </div>
+    ));
 
     let images = this.props.category.map(cat => (
       <div className="carousel-item" key={cat.name}>
@@ -130,52 +116,63 @@ class Welcome extends Component {
         )
       )
     );
-    n = 0;
-    let cats = this.props.category.map(cat => (
-      <div
-        id="carouselExampleControls"
-        className="carousel slide"
-        data-ride="carousel"
-      >
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img
-              className="d-block w-100"
-              src="http://development.com/wp-content/uploads/2018/05/development.jpg"
-              alt="First slide"
-              style={{ height: 500 }}
-            />
-          </div>
-          <div className="carousel-item">
-            <img
-              className="d-block w-100"
-              src="http://development.com/wp-content/uploads/2018/05/development.jpg"
-              alt="First slide"
-              style={{ height: 500 }}
-            />
-          </div>
-        </div>
+    n = 1;
+    let cats = this.props.category.map(
+      cat => (
+        (n = n + 1),
+        (
+          <div
+            id={`carouselExampleControls${n}`}
+            className="carousel slide"
+            data-ride="carousel"
+            key={cat.name}
+          >
+            <div className="carousel-inner">
+              <div className="carousel-item active">
+                <img
+                  className="d-block w-100"
+                  src="http://development.com/wp-content/uploads/2018/05/development.jpg"
+                  alt="First slide"
+                  style={{ height: 500 }}
+                />
+              </div>
+              {cat.item_types.map(type => (
+                <div className="carousel-item" key={type.name}>
+                  <img
+                    className="d-block w-100"
+                    src={type.logo}
+                    alt={type.name}
+                    style={{ height: 500 }}
+                  />
+                  <div className="carousel-caption d-none d-md-block">
+                    <h5>{type.name}</h5>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-        <a
-          className="carousel-control-prev"
-          href="#carouselExampleControls"
-          role="button"
-          data-slide="prev"
-        >
-          <span className="carousel-control-prev-icon" aria-hidden="true" />
-          <span className="sr-only">Previous</span>
-        </a>
-        <a
-          className="carousel-control-next"
-          href="#carouselExampleControls"
-          role="button"
-          data-slide="next"
-        >
-          <span className="carousel-control-next-icon" aria-hidden="true" />
-          <span className="sr-only">Next</span>
-        </a>
-      </div>
-    ));
+            <a
+              className="carousel-control-prev"
+              href={`#carouselExampleControls${n}`}
+              role="button"
+              data-slide="prev"
+            >
+              <span className="carousel-control-prev-icon" aria-hidden="true" />
+              <span className="sr-only">Previous</span>
+            </a>
+            <a
+              className="carousel-control-next"
+              href={`#carouselExampleControls${n}`}
+              role="button"
+              data-slide="next"
+            >
+              <span className="carousel-control-next-icon" aria-hidden="true" />
+              <span className="sr-only">Next</span>
+            </a>
+          </div>
+        )
+      )
+    );
 
     return (
       <div style={{ marginTop: 100 }}>

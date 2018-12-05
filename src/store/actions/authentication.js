@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode";
 
 import * as actionTypes from "./actionTypes";
 import { setErrors } from "./errors";
-
+import { fetchProfileDetail } from "./profile";
 const setAuthToken = token => {
   if (token) {
     console.log(token);
