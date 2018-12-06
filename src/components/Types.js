@@ -19,10 +19,8 @@ class Types extends Component {
   render() {
     const typeID = this.props.match.params.type;
 
-    console.log("ID:", typeID);
-    const type = this.props.items.filter(
-      obj => (console.log("obj:", obj), obj.id.toString() === typeID)
-    );
+    // console.log("ID:", typeID);
+    const type = this.props.items.filter(obj => obj.id.toString() === typeID);
 
     // const type2 = this.props.typeItems.filter(a => a.id.toString() === typeID);
     //
@@ -75,7 +73,7 @@ class Types extends Component {
     // console.log("item_type:");
     // console.log(itemTypes);
     // console.log("Current:");
-    console.log("Current", type);
+    // console.log("Current", type);
     // console.log("names:");
     // console.log(products);
 

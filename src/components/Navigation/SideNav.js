@@ -88,7 +88,8 @@ class SideNav extends React.Component {
           className="navbar-nav navbar-sidenav"
           id="exampleAccordion"
           style={{
-            backgroundColor: "#545454"
+            backgroundColor: "#545454",
+            height: 700
           }}
         >
           <li className="nav-item" data-toggle="tooltip" data-placement="right">
@@ -111,22 +112,7 @@ class SideNav extends React.Component {
           {/*this.props.channel*/}
         </ul>
         <ul className="navbar-nav sidenav-toggler">
-          <li className="nav-item">
-            <span
-              className="nav-link text-center"
-              id="sidenavToggler"
-              style={{ backgroundColor: "#393939" }}
-              onClick={() =>
-                this.setState(prevState => ({
-                  collapsed: !prevState.collapsed
-                }))
-              }
-            >
-              <FontAwesomeIcon
-                icon={this.state.collapsed ? faAngleLeft : faAngleRight}
-              />
-            </span>
-          </li>
+          <li className="nav-item" />
         </ul>
       </div>
     );

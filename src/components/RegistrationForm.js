@@ -49,12 +49,13 @@ class RegistationForm extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <div className="card col-6 mx-auto p-0 mt-5">
+      <div
+        className="card col-6 mx-auto p-0"
+        style={{ marginBottom: 350, marginTop: 200 }}
+      >
         <div className="card-body">
-          <h5 className="card-title mb-4">
-            {type === "login"
-              ? "Login to send messages"
-              : "Register an account"}
+          <h5 className="card-title mb-4 text-center login">
+            {type === "login" ? "Login" : "Register an account"}
           </h5>
           {errors.non_field_errors && (
             <div className="alert alert-danger" role="alert">

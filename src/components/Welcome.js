@@ -93,17 +93,23 @@ class Welcome extends Component {
     ));
 
     let images = this.props.category.map(cat => (
-      <div className="carousel-item" key={cat.name}>
+      <Link className="carousel-item" key={cat.name} to={`/types/${cat.id}`}>
+        <div
+          className="carousel-caption d-none d-md-block typename"
+          style={{ marginBottom: 200, fontSize: 20 }}
+        >
+          <h1>{cat.name}</h1>
+        </div>
         <img
           className="d-block w-100"
           src={cat.logo}
           alt={cat.name}
           style={{ height: 500 }}
         />
-      </div>
+      </Link>
     ));
 
-    let n = 0;
+    let n = -1;
     let slides = this.props.category.map(
       slide => (
         (n = n + 1),
@@ -119,6 +125,7 @@ class Welcome extends Component {
     n = 1;
     let cats = this.props.category.map(
       cat => (
+        console.log(cat.id),
         (n = n + 1),
         (
           <div
@@ -127,7 +134,7 @@ class Welcome extends Component {
             data-ride="carousel"
             key={cat.name}
           >
-            <div className="carousel-inner">
+            <Link className="carousel-inner" to={`/types/${cat.id}`}>
               <div className="carousel-item active">
                 <img
                   className="d-block w-100"
@@ -149,7 +156,7 @@ class Welcome extends Component {
                   </div>
                 </div>
               ))}
-            </div>
+            </Link>
 
             <a
               className="carousel-control-prev"
@@ -193,7 +200,6 @@ class Welcome extends Component {
                 data-slide-to="0"
                 className="active"
               />
-
               {slides}
             </ol>
             <div className="carousel-inner">
@@ -228,7 +234,7 @@ class Welcome extends Component {
           </div>
         </div>
         /////////////////////////////////////////////////////////////////////////////////////
-        <div
+        {/*<div
           id="carouselExampleControls1"
           className="carousel slide"
           data-ride="carousel"
@@ -263,10 +269,10 @@ class Welcome extends Component {
             <span className="carousel-control-next-icon" aria-hidden="true" />
             <span className="sr-only">Next</span>
           </a>
-        </div>
+        </div>*/}
         ///////////////////////////////////////////////////////////////////////////////////
         {/*  <div style={{ marginTop: 100 }}>{categories}</div> */}
-        {cats}
+        {/*cats*/}
       </div>
     );
   }

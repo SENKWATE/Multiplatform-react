@@ -49,7 +49,7 @@ class ItemCard extends Component {
 
   render() {
     const item = this.props.item;
-    // console.log(item);
+
     return (
       <div className="mb-2">
         <Link
@@ -74,8 +74,8 @@ class ItemCard extends Component {
             <h4 className="card-title text-center" style={{ color: "white" }}>
               <span>{item.name}</span>
               <div style={{ fontSize: 16 }}>
-                {item.biddings && item.biddings.length ? (
-                  <div>Bidding price: {item.highest_bid} K.D by</div>
+                {item.starting_price !== item.highest_bid ? (
+                  <div>Highest bid: {item.highest_bid} K.D </div>
                 ) : (
                   <div>Initial Price: {item.starting_price} K.D</div>
                 )}

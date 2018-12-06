@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 // Components
 import AuthButton from "./AuthButton";
 import SideNav from "./SideNav";
-
+import logo from "../../images/logo.png";
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +34,7 @@ class NavBar extends Component {
       <nav
         className="navbar navbar-expand-lg navbar-dark fixed-top"
         id="mainNav"
-        style={{ height: 60, backgroundColor: "#393939" }}
+        style={{ height: 70, backgroundColor: "#393939" }}
       >
         <Link
           className="navbar-brand"
@@ -42,7 +42,7 @@ class NavBar extends Component {
           style={{ width: 50, marginRight: 50 }}
           onClick={() => this.categoryName("Category")}
         >
-          Main-Menu
+          Home
         </Link>
         <li className="nav-item dropdown navbar-brand">
           <a
@@ -61,6 +61,13 @@ class NavBar extends Component {
             {category}
           </div>
         </li>
+        <Link to="/welcome">
+          <img
+            src={logo}
+            style={{ width: 260, height: 80, marginLeft: 200 }}
+            alt="logo"
+          />
+        </Link>
         <button
           className="navbar-toggler navbar-toggler-right"
           type="button"
