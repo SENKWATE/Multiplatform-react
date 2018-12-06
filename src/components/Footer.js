@@ -12,7 +12,7 @@ function Footer(props) {
     >
       <div className="container">
         <div className="text-center">
-          <small>Mno yzeed website is sponsored by Zain</small>
+          <small>MnoYzeed website is sponsored by Zain</small>
         </div>
       </div>
     </footer>

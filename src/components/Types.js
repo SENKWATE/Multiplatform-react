@@ -81,7 +81,7 @@ class Types extends Component {
       <div>
         <h1
           className="text-center typeTitle"
-          style={{ marginTop: 50, fontSize: 60, color: "white" }}
+          style={{ marginTop: 60, fontSize: 60, color: "white" }}
         >
           {name}
         </h1>

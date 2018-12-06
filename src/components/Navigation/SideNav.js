@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import * as actionCreators from "../../store/actions/authentication";
+import * as actionCreators from "../../store/actions/profile";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -72,16 +72,11 @@ class SideNav extends React.Component {
 
     console.log("MYBiddings: ", myBiddings);
 
-    let rows = myBiddings.map(
-      row => (
-        console.log(row),
-        (
-          <li className="list-group-item">
-            <Link to={`/items/${row.item.id}/`}>{row.item.name}</Link>
-          </li>
-        )
-      )
-    );
+    let rows = myBiddings.map(row => (
+      <li className="list-group-item" key={row.item.name}>
+        <Link to={`/items/${row.item.id}/`}>{row.item.name}</Link>
+      </li>
+    ));
     return (
       <div>
         <ul
@@ -100,10 +95,20 @@ class SideNav extends React.Component {
                   style={{ color: "white" }}
                 >
                   <FontAwesomeIcon icon={faGavel} style={{ fontSize: 25 }} />
-                  <span className="nav-link-text mr-2"> My Auctions</span>
+                  <span
+                    className="nav-link-text mr-2"
+                    onClick={() =>
+                      this.props.getProfile(this.props.user.user_id)
+                    }
+                  >
+                    {" "}
+                    My Auctions
+                  </span>
                 </div>
                 <div className="card" style={{ marginLeft: 5, width: 220 }}>
-                  <ul className="list-group list-group-flush">{rows}</ul>
+                  <ul className="list-group list-group-flush text-center">
+                    {rows}
+                  </ul>
                 </div>
               </div>
             ) : null}
@@ -120,12 +125,13 @@ class SideNav extends React.Component {
 }
 const mapStateToProps = state => ({
   user: state.auth.user,
-  profile: state.profile.profile
+  profile: state.profile.profile,
+  mybids: state.profile.mybids
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    // fetchChannels: () => dispatch(actionCreators.fetchChannels())
+    getProfile: userID => dispatch(actionCreators.fetchProfileDetail(userID))
   };
 };
 

@@ -6,6 +6,8 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+  let count = 0;
+
   switch (action.type) {
     case actionTypes.FETCH_PROFILE_DETAIL:
       return {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faGavel } from "@fortawesome/free-solid-svg-icons";
 
 class Loading extends Component {
   render() {
@@ -9,7 +9,7 @@ class Loading extends Component {
         className="spinner mx-auto text-center"
         style={{ marginTop: 370, marginBottom: 300, color: "white" }}
       >
-        <FontAwesomeIcon icon={faSpinner} spin size="4x" />
+        <FontAwesomeIcon icon={faSpinner} spin size="5x" />
       </div>
     );
   }
